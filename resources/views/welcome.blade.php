@@ -42,10 +42,21 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
 
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: url('assets/img/backgrounds/cspc-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: difference;
+        }
+    </style>
+
 </head>
 
 <body>
-
     <!-- Content -->
 
     <div class="container-xxl">

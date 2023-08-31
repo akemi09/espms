@@ -61,12 +61,54 @@
     <ul class="menu-inner py-1">
 
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+
+        @can('view-users')
+            <!-- Users -->
+            <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="Analytics">Users</div>
+                </a>
+            </li>
+        @endcan
+
+        @can('view-opcr')
+            <!-- OPCR -->
+            <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="Form Layouts">OPCR</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Vertical Form">Vertical Form</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Horizontal Form">Horizontal Form</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+
+        @can('view-ipcr')
+            <!-- IPCR -->
+            <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Analytics">IPCR</div>
+                </a>
+            </li>
+        @endcan
 
     </ul>
 
