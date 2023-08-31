@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login - SPMS</title>
+    <title>Login - {{ config('app.name') ?? 'ESPMS' }}</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
@@ -118,11 +118,11 @@
                                     </svg>
 
                                 </span>
-                                <span class="app-brand-text demo text-body fw-bolder">SPMS</span>
+                                <span class="app-brand-text demo text-body fw-bolder">ESPMS</span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Welcome to SPMS! 👋</h4>
+                        <h4 class="mb-2">Welcome to ESPMS! 👋</h4>
                         <p class="mb-4">Please sign-in to your account</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ route('login.store') }}" method="POST">
