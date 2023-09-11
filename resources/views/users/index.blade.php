@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="bx bx-plus"></i> Add new user</a>
+            <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="bx bx-plus"></i> Add New User</a>
         </div>
     </div>
     <div class="table-response text-nowrap mt-3">
@@ -23,7 +23,7 @@
                         <td>{{ $user->email }}</td>
                         <td>
                             @foreach ($user->getRoleNames() as $role)
-                                <span class="badge bg-label-success me-1">{{ $role }}</span>
+                                <span class="badge bg-label-primary me-1">{{ $role }}</span>
                             @endforeach
                         </td>
                         <td>

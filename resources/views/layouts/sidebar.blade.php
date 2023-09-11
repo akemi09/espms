@@ -78,37 +78,40 @@
             </li>
         @endcan
 
-        @can('view-opcr')
-            <!-- OPCR -->
-            <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'open' : '' }}">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-detail"></i>
-                    <div data-i18n="Form Layouts">OPCR</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
-                            <div data-i18n="Vertical Form">Vertical Form</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
-                            <div data-i18n="Horizontal Form">Horizontal Form</div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endcan
+        <li class="menu-item {{ request()->segment(1) == 'mfo-pap' ? 'active' : '' }}">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">IPCR</div>
+            </a>
+        </li>
 
-        @can('view-ipcr')
-            <!-- IPCR -->
-            <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-file"></i>
-                    <div data-i18n="Analytics">IPCR</div>
-                </a>
-            </li>
-        @endcan
+        <!-- OPCR -->
+        <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Form Layouts">OPCR</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Vertical Form">Vertical Form</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Horizontal Form">Horizontal Form</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- IPCR -->
+        <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">IPCR</div>
+            </a>
+        </li>
 
     </ul>
 

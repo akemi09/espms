@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Office;
 
 class UserController extends Controller
 {
@@ -31,8 +32,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::orderBy('name', 'asc')->get();
+        $offices = Office::orderBy('name', 'asc')->get();
 
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles', 'offices'));
     }
 
     /**
@@ -45,6 +47,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => Str::title($data['name']),
             'email' => $data['email'],
+            'designation' => $data['designation'],
+            'office_id' => $data['office'],
             'password' => Hash::make($data['password'])
         ]);
 
@@ -74,12 +78,16 @@ class UserController extends Controller
         }
 
         $roles = Role::orderBy('name', 'asc')->get();
+        $offices = Office::orderBy('name', 'asc')->get();
+
         $user_roles = [];
         foreach ($user->roles as $role) {
             array_push($user_roles, $role['name']);
         }
+
+        $user->with('office');
         
-        return view('users.edit', compact('roles', 'user', 'user_roles'));
+        return view('users.edit', compact('roles', 'user', 'user_roles', 'offices'));
     }
 
     /**
@@ -92,6 +100,8 @@ class UserController extends Controller
         
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->designation = $data['designation'];
+        $user->office_id = $data['office'];
         $user->syncRoles($data['roles']);
         $user->save();
 
