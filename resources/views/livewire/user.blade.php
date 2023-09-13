@@ -15,6 +15,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Designation</th>
                     <th>Roles</th>
                     <th>Action</th>
                 </tr>
@@ -24,6 +25,7 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->designation }}</td>
                         <td>
                             @foreach ($user->getRoleNames() as $role)
                                 <span class="badge bg-label-primary me-1">{{ $role }}</span>
@@ -58,6 +60,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Designation</th>
                     <th>Roles</th>
                     <th>Action</th>
                 </tr>

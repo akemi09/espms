@@ -130,6 +130,7 @@ class User extends Component
     {
         $users =  Users::where('name', 'like', '%'.$this->query.'%')
                     ->orWhere('email', 'like', '%'.$this->query.'%')
+                    ->orWhere('designation', 'like', '%'.$this->query.'%')
                     ->paginate(10);
         $offices = Office::orderBy('name', 'asc')->get();
         $roles_list = Role::orderBy('name', 'asc')->get();
