@@ -68,6 +68,10 @@
             </a>
         </li>
 
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Settings</span>
+        </li>
+
         @can('view-users')
             <!-- Users -->
             <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
@@ -83,6 +87,17 @@
                 <i class="menu-icon tf-icons bx bx-buildings"></i>
                 <div data-i18n="Analytics">Offices</div>
             </a>
+        </li>
+
+        <li class="menu-item {{ request()->segment(1) == 'mfo-pap' ? 'active' : '' }}">
+            <a href="{{ route('mfo-pap.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="Analytics">MFO/PAP</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">OPCR</span>
         </li>
 
         <!-- OPCR -->
@@ -103,6 +118,10 @@
                     </a>
                 </li>
             </ul>
+        </li>
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">IPCR</span>
         </li>
 
         <!-- IPCR -->

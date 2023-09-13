@@ -5,6 +5,7 @@ use App\Livewire\Office;
 use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Livewire\MfoPap;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -20,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users', User::class)->name('users.index');
 
     Route::get('/offices', Office::class)->name('offices.index');
+
+    Route::get('/mfo-pap', MfoPap::class)->name('mfo-pap.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
