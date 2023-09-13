@@ -96,6 +96,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->segment(1) == 'calendar' ? 'active' : '' }}">
+            <a href="{{ route('calendar.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div data-i18n="Analytics">Calendar</div>
+            </a>
+        </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>
         </li>

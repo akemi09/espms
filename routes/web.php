@@ -5,6 +5,7 @@ use App\Livewire\Office;
 use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Livewire\Calendar;
 use App\Livewire\MfoPap;
 
 Route::middleware(['guest'])->group(function () {
@@ -23,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/offices', Office::class)->name('offices.index');
 
     Route::get('/mfo-pap', MfoPap::class)->name('mfo-pap.index');
+
+    Route::get('/calendar', Calendar::class)->name('calendar.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
