@@ -44,12 +44,12 @@ class Office extends Component
         $this->office_name = $office->name;
     }
 
-    public function update($id)
+    public function update()
     {
         $this->validate();
 
-        $office = Offices::find($id);
-        $office->name = $this->edit_office_name;
+        $office = Offices::find($this->office_id);
+        $office->name = $this->office_name;
         $office->save();
 
         session()->flash('success', 'Office updated.');
@@ -73,8 +73,6 @@ class Office extends Component
     public function render()
     {
         $offices =  Offices::where('name', 'like', '%'.$this->query.'%')->paginate(10);
-        return view('livewire.office', [
-            'offices' => $offices
-        ]);
+        return view('livewire.office', compact('offices'));
     }
 }

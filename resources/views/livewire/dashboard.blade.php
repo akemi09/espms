@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<div>
     <div class="row">
         @can('view-users')
         <div class="col-lg-3 col-md-3 col-3 mb-4">
@@ -27,4 +25,4 @@
         </div>
         @endcan
     </div>
-@endsection
+</div>

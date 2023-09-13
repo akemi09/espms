@@ -42,7 +42,9 @@
                         </td>
                     </tr>
                 @empty
-                    No data
+                    <tr>
+                        <td colspan="4">Not found</td>
+                    </tr>
                 @endforelse
             </tbody>
             <tfoot>
@@ -119,7 +121,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" wire:click="cancel" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" wire:click="update({{ $office_id }})" wire:loading.attr="disabled"
+                        <button type="button" wire:click="update" wire:loading.attr="disabled"
                             class="btn btn-primary">Update</button>
                     </div>
                 </form>

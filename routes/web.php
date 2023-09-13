@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MFOPAPController;
-use App\Http\Controllers\DashboardController;
+use App\Livewire\User;
 use App\Livewire\Office;
+use App\Livewire\Dashboard;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -16,13 +15,11 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-    Route::resource('users', UserController::class);
+    Route::get('/users', User::class)->name('users.index');
 
-    Route::get('offices', Office::class)->name('offices.index');
-
-    Route::resource('mfo-pap', MFOPAPController::class);
+    Route::get('/offices', Office::class)->name('offices.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
