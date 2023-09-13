@@ -26,7 +26,8 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
+        class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
@@ -40,16 +41,14 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
-    
-    @stack('styles')
 
-    @livewireStyles
+    @stack('styles')
 </head>
 
 <body>
 
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar  ">
+    <div class="layout-wrapper layout-content-navbar">
 
         <div class="layout-container">
 
@@ -72,7 +71,7 @@
                         <div class="card">
                             <div class="card-body">
                                 @include('layouts.flash')
-                                @yield('content')
+                                {{ $slot }}
                             </div>
                         </div>
                     </div>
@@ -112,13 +111,12 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
+    {{-- <script src="{{ asset('assets/js/ui-modals.js') }}"></script> --}}
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     @stack('scripts')
-
-    @livewireScripts
 </body>
 
 </html>

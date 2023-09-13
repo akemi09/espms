@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MFOPAPController;
 use App\Http\Controllers\DashboardController;
+use App\Livewire\Office;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -18,6 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::resource('users', UserController::class);
+
+    Route::get('offices', Office::class)->name('offices.index');
 
     Route::resource('mfo-pap', MFOPAPController::class);
 

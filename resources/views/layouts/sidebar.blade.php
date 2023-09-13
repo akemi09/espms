@@ -78,10 +78,10 @@
             </li>
         @endcan
 
-        <li class="menu-item {{ request()->segment(1) == 'mfo-pap' ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Analytics">IPCR</div>
+        <li class="menu-item {{ request()->segment(1) == 'offices' ? 'active' : '' }}">
+            <a href="{{ route('offices.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-buildings"></i>
+                <div data-i18n="Analytics">Offices</div>
             </a>
         </li>
 
