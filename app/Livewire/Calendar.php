@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Carbon\CarbonPeriod;
 use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
 use App\Models\Calendar as Calendars;
+use App\Models\CalendarRange;
 
 class Calendar extends Component
 {
@@ -35,12 +37,30 @@ class Calendar extends Component
     {
         $this->validate();
 
-        Calendars::create([
+        $isDefined = CalendarRange::where('date_range', $this->event_from)->first();
+
+        if ($isDefined)
+        {
+            $this->addError('event_from', "Unable to set this date, as it has been designated within the '{$isDefined->calendar->event_name}' event.");
+            return false;
+        }
+
+
+        $period = CarbonPeriod::create($this->event_from, $this->event_end);
+
+       
+        $calendar = Calendars::create([
             'user_id' => auth()->user()->id,
             'event_name' => $this->event_name,
             'event_from' => $this->event_from,
             'event_end' => $this->event_end
         ]);
+
+        foreach ($period as $date) {
+            $calendar->calendar_range()->create([
+                'date_range' => $date->format('Y-m-d')
+            ]);
+        }
 
         session()->flash('success', 'Event created.');
 

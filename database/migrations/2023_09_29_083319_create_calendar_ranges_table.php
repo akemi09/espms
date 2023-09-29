@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calendars', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('event_name');
-            $table->date('event_from');
-            $table->date('event_end');
+        Schema::create('calendar_ranges', function (Blueprint $table) {
+            $table->foreignId('calendar_id')->constrained()->onDelete('cascade');
+            $table->date('date_range');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calendars');
+        Schema::dropIfExists('calendar_ranges');
     }
 };
