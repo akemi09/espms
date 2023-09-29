@@ -37,7 +37,7 @@ class Calendar extends Component
     {
         $this->validate();
 
-        $isDefined = CalendarRange::where('date_range', $this->event_from)->first();
+        $isDefined = CalendarRange::whereIn('date_range', [$this->event_from, $this->event_end])->first();
 
         if ($isDefined)
         {
