@@ -9,7 +9,7 @@
                 wire:keydown='search'>
         </div>
     </div>
-    <div class="table-response text-nowrap mt-3">
+    <div class="table-responsive text-nowrap mt-3">
         <table class="table mb-3">
             <thead>
                 <tr>
@@ -113,6 +113,27 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">Target Type</label>
+                                @foreach ($target_types as $key => $targetType)
+                                    <div class="form-check">
+                                        <input wire:model="target_type"
+                                            class="form-check-input @error('target_type') is-invalid @enderror"
+                                            type="checkbox" value="{{ $targetType->id }}" id="target_type{{ $key }}">
+
+                                        <label class="form-check-label" for="target_type{{ $key }}">
+                                            {{ $targetType->name}}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+                                @error('target_type')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -178,6 +199,29 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Target Type</label>
+                                @foreach ($target_types as $key => $targetType)
+                                    <div class="form-check">
+                                        <input wire:model="target_type"
+                                            class="form-check-input @error('target_type') is-invalid @enderror"
+                                            type="checkbox" value="{{ $targetType->id }}"
+                                            id="target_type{{ $key }}" @checked(in_array($targetType->id, $target_type))>
+
+                                        <label class="form-check-label" for="target_type{{ $key }}">
+                                            {{ $targetType->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+                                @error('target_type')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
 
                         </div>

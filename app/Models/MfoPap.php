@@ -17,6 +17,11 @@ class MfoPap extends Model
         return $this->hasMany(MfoPapOffice::class);
     }
 
+    public function mfo_pap_target_type()
+    {
+        return $this->hasMany(MfoPapTargetType::class);
+    }
+
     public function target_function()
     {
         return $this->belongsTo(TargetFuntion::class);

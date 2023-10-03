@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 use App\Models\TargetFuntion;
 use Livewire\Attributes\Rule;
 use App\Models\MfoPap as MfoPaps;
+use App\Models\MfoPapTargetType;
+use App\Models\TargetType;
 
 class MfoPap extends Component
 {
@@ -29,6 +31,9 @@ class MfoPap extends Component
     #[Rule('required')]
     public $target_function = '';
 
+    #[Rule('required')]
+    public $target_type = [];
+
     public function search()
     {
         $this->resetPage();
@@ -36,6 +41,7 @@ class MfoPap extends Component
 
     public function store()
     {
+
         $this->validate();
 
         $mfo_pap = MfoPaps::create([
@@ -48,6 +54,14 @@ class MfoPap extends Component
             $mfo_pap->mfo_pap_office()->create([
                 'mfo_pap_id' => $mfo_pap->id,
                 'office_id' => $office
+            ]);
+        }
+
+        foreach($this->target_type as $targetType)
+        {
+            $mfo_pap->mfo_pap_target_type()->create([
+                'mfo_pap_id' => $mfo_pap->id,
+                'target_type_id' => $targetType
             ]);
         }
 
@@ -66,6 +80,10 @@ class MfoPap extends Component
             array_push($this->office, $office->office_id);
         }
 
+        foreach ($mfo_pap->mfo_pap_target_type as $target_type) {
+            array_push($this->target_type, $target_type->target_type_id);
+        }
+
         $this->target_function = $mfo_pap->target_function_id;
 
     }
@@ -82,6 +100,14 @@ class MfoPap extends Component
             $mfo_pap->mfo_pap_office()->create([
                 'mfo_pap_id' => $mfo_pap->id,
                 'office_id' => $office
+            ]);
+        }
+
+        MfoPapTargetType::where('mfo_pap_id', $this->mfo_pap_id)->delete();
+        foreach ($this->target_type as $target_type) {
+            $mfo_pap->mfo_pap_target_type()->create([
+                'mfo_pap_id' => $mfo_pap->id,
+                'target_type_id' => $target_type
             ]);
         }
 
@@ -107,6 +133,7 @@ class MfoPap extends Component
         $this->title = '';
         $this->office = [];
         $this->target_function = '';
+        $this->target_type = [];
         $this->resetValidation();
     }
 
@@ -119,6 +146,8 @@ class MfoPap extends Component
 
         $target_functions = TargetFuntion::orderBy('name', 'asc')->get();
 
-        return view('livewire.mfo-pap', compact('mfo_paps', 'offices', 'target_functions'));
+        $target_types = TargetType::orderBy('name', 'asc')->get();
+
+        return view('livewire.mfo-pap', compact('mfo_paps', 'offices', 'target_functions', 'target_types'));
     }
 }
