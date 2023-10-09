@@ -104,6 +104,18 @@
         </li>
 
         <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">SUCCESS INDICATORS</span>
+        </li>
+
+         <!-- TARGETS -->
+         <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
+            <a href="{{ route('my-targets.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="My Targets">My Targets</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>
         </li>
 
