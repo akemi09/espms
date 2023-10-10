@@ -51,4 +51,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Office::class, 'id', 'office_id');
     }
+
 }

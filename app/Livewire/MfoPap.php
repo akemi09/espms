@@ -31,8 +31,8 @@ class MfoPap extends Component
     #[Rule('required')]
     public $target_function = '';
 
-    #[Rule('required')]
-    public $target_type = [];
+    // #[Rule('required')]
+    // public $target_type = [];
 
     public function search()
     {
@@ -57,13 +57,13 @@ class MfoPap extends Component
             ]);
         }
 
-        foreach($this->target_type as $targetType)
-        {
-            $mfo_pap->mfo_pap_target_type()->create([
-                'mfo_pap_id' => $mfo_pap->id,
-                'target_type_id' => $targetType
-            ]);
-        }
+        // foreach($this->target_type as $targetType)
+        // {
+        //     $mfo_pap->mfo_pap_target_type()->create([
+        //         'mfo_pap_id' => $mfo_pap->id,
+        //         'target_type_id' => $targetType
+        //     ]);
+        // }
 
         session()->flash('success', 'MFO/PAP created.');
 
@@ -80,9 +80,9 @@ class MfoPap extends Component
             array_push($this->office, $office->office_id);
         }
 
-        foreach ($mfo_pap->mfo_pap_target_type as $target_type) {
-            array_push($this->target_type, $target_type->target_type_id);
-        }
+        // foreach ($mfo_pap->mfo_pap_target_type as $target_type) {
+        //     array_push($this->target_type, $target_type->target_type_id);
+        // }
 
         $this->target_function = $mfo_pap->target_function_id;
 
@@ -103,13 +103,13 @@ class MfoPap extends Component
             ]);
         }
 
-        MfoPapTargetType::where('mfo_pap_id', $this->mfo_pap_id)->delete();
-        foreach ($this->target_type as $target_type) {
-            $mfo_pap->mfo_pap_target_type()->create([
-                'mfo_pap_id' => $mfo_pap->id,
-                'target_type_id' => $target_type
-            ]);
-        }
+        // MfoPapTargetType::where('mfo_pap_id', $this->mfo_pap_id)->delete();
+        // foreach ($this->target_type as $target_type) {
+        //     $mfo_pap->mfo_pap_target_type()->create([
+        //         'mfo_pap_id' => $mfo_pap->id,
+        //         'target_type_id' => $target_type
+        //     ]);
+        // }
 
         $mfo_pap->save();
 
@@ -133,7 +133,7 @@ class MfoPap extends Component
         $this->title = '';
         $this->office = [];
         $this->target_function = '';
-        $this->target_type = [];
+        // $this->target_type = [];
         $this->resetValidation();
     }
 
@@ -146,8 +146,8 @@ class MfoPap extends Component
 
         $target_functions = TargetFuntion::orderBy('name', 'asc')->get();
 
-        $target_types = TargetType::orderBy('name', 'asc')->get();
+        // $target_types = TargetType::orderBy('name', 'asc')->get();
 
-        return view('livewire.mfo-pap', compact('mfo_paps', 'offices', 'target_functions', 'target_types'));
+        return view('livewire.mfo-pap', compact('mfo_paps', 'offices', 'target_functions'));
     }
 }

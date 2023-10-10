@@ -113,7 +113,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label class="form-label">Target Type</label>
                                 @foreach ($target_types as $key => $targetType)
                                     <div class="form-check">
@@ -132,7 +132,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label class="form-label">Target Type</label>
                                 @foreach ($target_types as $key => $targetType)
                                     <div class="form-check">
@@ -222,7 +222,7 @@
                                     </div>
                                 @enderror
 
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
