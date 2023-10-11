@@ -39,9 +39,10 @@ class MyTargets extends Component
 
     public function destroy($key)
     {
+        Pcr::where('id', $this->targets[$key]['id'])->delete();
         unset($this->targets[$key]);
 
-        Pcr::where('id', $key)->delete();
+        session()->flash('success', 'Deleted.');
     }
 
     public $rules = [
@@ -55,6 +56,7 @@ class MyTargets extends Component
 
     public function update()
     {
+        
         $this->validate();
 
         foreach ($this->targets as $target) {
@@ -66,6 +68,8 @@ class MyTargets extends Component
                 ]
             );
         }
+
+        session()->flash('success', 'Updated.');
 
     }
 

@@ -59,6 +59,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        @include('layouts.flash')
                         <div class="row">
                             <div class="col mb-3">
                                 @if (count($targets) > 0)
