@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\MfoPap;
-use App\Models\Office;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mfo_pap_offices', function (Blueprint $table) {
-            $table->foreignIdFor(MfoPap::class);
-            $table->foreignIdFor(Office::class);
+        Schema::create('calendar_ranges', function (Blueprint $table) {
+            $table->foreignId('calendar_id')->constrained()->onDelete('cascade');
+            $table->date('date_range');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mfo_pap_offices');
+        Schema::dropIfExists('calendar_ranges');
     }
 };

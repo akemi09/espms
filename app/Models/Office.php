@@ -15,4 +15,9 @@ class Office extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function mfo_paps()
+    {
+        return $this->belongsToMany(MfoPap::class, 'mfo_pap_offices')->orderBy('id', 'asc');
+    }
 }
