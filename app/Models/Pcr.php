@@ -16,4 +16,9 @@ class Pcr extends Model
     public const DISAPPROVED = 3;
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
