@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Livewire\Calendar;
 use App\Livewire\MfoPap;
 use App\Livewire\MyTargets;
+use App\Livewire\TargetApproval;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -29,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar', Calendar::class)->name('calendar.index');
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
+
+    Route::get('/target-approvals', TargetApproval::class)->name('target.approvals.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
