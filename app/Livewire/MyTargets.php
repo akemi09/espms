@@ -65,6 +65,7 @@ class MyTargets extends Component
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
                     'targets' => $target['title'],
+                    'status' => Pcr::NEW,
                 ]
             );
         }
@@ -89,6 +90,10 @@ class MyTargets extends Component
 
         $mfo_paps = $mfo_paps->groupBy('target_function_id');
 
-        return view('livewire.my-targets', compact('target_functions', 'mfo_paps'));
+        $target_counts = Pcr::where('user_id', auth()->user()->id)
+                        ->whereYear('created_at', now()->format('Y'))
+                        ->count();
+
+        return view('livewire.my-targets', compact('target_functions', 'mfo_paps', 'target_counts'));
     }
 }
