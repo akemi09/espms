@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('event_name');
             $table->date('event_from');
             $table->date('event_end');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

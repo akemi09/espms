@@ -49,6 +49,7 @@ class User extends Authenticatable
 
     public function office()
     {
-        return $this->hasOne(Office::class);
+        return $this->hasOne(Office::class, 'id', 'office_id');
     }
+
 }

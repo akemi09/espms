@@ -15,6 +15,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Office</th>
                     <th>Designation</th>
                     <th>Roles</th>
                     <th>Action</th>
@@ -25,6 +26,7 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <th>{{ $user->office->name }}</th>
                         <td>{{ $user->designation }}</td>
                         <td>
                             @foreach ($user->getRoleNames() as $role)
@@ -32,7 +34,7 @@
                             @endforeach
                         </td>
                         <td>
-                            @if ($user->id != 1)
+                            {{-- @if ($user->id != 1) --}}
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                         data-bs-toggle="dropdown" aria-expanded="false"><i
@@ -47,12 +49,12 @@
                                                 class="bx bx-trash me-1"></i> Delete</button>
                                     </div>
                                 </div>
-                            @endif
+                            {{-- @endif --}}
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4">Not found</td>
+                        <td colspan="4">No records</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -60,6 +62,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Office</th>
                     <th>Designation</th>
                     <th>Roles</th>
                     <th>Action</th>

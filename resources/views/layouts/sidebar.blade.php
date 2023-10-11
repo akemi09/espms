@@ -104,6 +104,25 @@
         </li>
 
         <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">SUCCESS INDICATORS</span>
+        </li>
+
+         <!-- TARGETS -->
+        <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
+            <a href="{{ route('my-targets.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="My Targets">My Targets</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ request()->segment(1) == 'target-approvals' ? 'active' : '' }}">
+            <a href="{{ route('target.approvals.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Target Approvals">Target Approvals</div>
+            </a>
+        </li>
+
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>
         </li>
 
@@ -137,7 +156,7 @@
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">IPCR</div>
             </a>
-        </li>
+        </li> --}}
 
     </ul>
 
