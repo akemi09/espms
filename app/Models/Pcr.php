@@ -15,10 +15,29 @@ class Pcr extends Model
     public const APPROVED = 2;
     public const DISAPPROVED = 3;
 
+    public const BADGE_COLOR = [
+        0 => 'dark',
+        1 => 'warning',
+        2 => 'success',
+        3 => 'danger',
+    ];
+
+    public const STATUS = [
+        0 => 'NEW',
+        1 => 'FOR APPROVAL',
+        2 => 'APPROVED',
+        3 => 'DISAPPROVED',
+    ];
+
     protected $guarded = [];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function mfo_pap()
+    {
+        return $this->belongsTo(MfoPap::class);
     }
 }

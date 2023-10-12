@@ -12,7 +12,7 @@
                             </button>
                         </h2>
 
-                        <div id="accordion{{ $key }}" class="accordion-collapse collapse"
+                        <div id="accordion{{ $key }}" class="accordion-collapse collapse show"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 @foreach ($mfo_paps as $key => $mfo_pap)
@@ -27,7 +27,7 @@
                                             <tbody>
                                                 @foreach ($mfo_pap as $mp)
                                                     <tr>
-                                                        <td>{{ $loop->index + 1 }}. {{ $mp['title'] }}</td>
+                                                        <td width="80%">{{ $loop->index + 1 }}. {{ $mp['title'] }}</td>
                                                         <td>
                                                             <button wire:click="edit({{ $mp['id'] }})"
                                                                 class="btn btn-primary" data-bs-toggle="modal"

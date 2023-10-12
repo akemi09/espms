@@ -9,6 +9,7 @@ use App\Livewire\Calendar;
 use App\Livewire\MfoPap;
 use App\Livewire\MyTargets;
 use App\Livewire\TargetApproval;
+use App\Livewire\TargetApprovalView;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -31,7 +32,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
 
-    Route::get('/target-approvals', TargetApproval::class)->name('target.approvals.index');
+    Route::prefix('target-approvals')->group(function () {
+        Route::get('/', TargetApproval::class)->name('target.approvals.index');
+        Route::get('/view/{user}', TargetApprovalView::class)->name('target.approvals.show');
+    });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

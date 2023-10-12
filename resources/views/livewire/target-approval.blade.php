@@ -14,9 +14,9 @@
                     <tr>
                         <td>{{ $pcr_user->user->name }}</td>
                         <td>{{ $pcr_user->user->office->name }}</td>
-                        <th>{{ $pcr_user->user->designation }}</th>
+                        <td>{{ $pcr_user->user->designation }}</td>
                         <td>
-                            <a href="#">View</a>
+                            <a class="btn btn-primary" href="{{ route('target.approvals.show', $pcr_user->user_id) }}">View</a>
                         </td>
                     </tr>
                 @empty
