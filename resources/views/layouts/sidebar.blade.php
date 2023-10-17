@@ -144,7 +144,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">IPCR</span>
@@ -152,11 +152,11 @@
 
         <!-- IPCR -->
         <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+            <a href="{{ route('ipcr.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">IPCR</div>
             </a>
-        </li> --}}
+        </li>
 
     </ul>
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TargetAcknowledgementController;
 use App\Livewire\Calendar;
+use App\Livewire\Ipcr;
 use App\Livewire\MfoPap;
 use App\Livewire\MyTargets;
 use App\Livewire\TargetApproval;
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar', Calendar::class)->name('calendar.index');
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
+
+    Route::get('/ipcr', Ipcr::class)->name('ipcr.index');
 
     Route::prefix('target-approvals')->group(function () {
         Route::get('/', TargetApproval::class)->name('target.approvals.index');
