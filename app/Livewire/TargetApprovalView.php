@@ -3,10 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\Pcr;
-use App\Models\TargetFuntion;
+use App\Models\TargetAcknowledgement;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\TargetFuntion;
 
 class TargetApprovalView extends Component
 {
@@ -14,10 +15,22 @@ class TargetApprovalView extends Component
 
     protected $paginationTheme = 'bootstrap';
     
-    public $user;
+    public User $user;
+
+    public $isAcknowledge = 'no';
+    public $target_acknowledgement;
 
     public function mount(User $user)
     {
+        $target_acknowledge = TargetAcknowledgement::where('target_user_id', $user->id)->first();
+
+        if ($target_acknowledge)
+        {
+            $this->isAcknowledge = 'yes';
+        }
+
+        $this->target_acknowledgement = $target_acknowledge;
+
         $this->user = $user;
     }
 

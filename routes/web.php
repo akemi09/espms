@@ -5,6 +5,7 @@ use App\Livewire\Office;
 use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TargetAcknowledgementController;
 use App\Livewire\Calendar;
 use App\Livewire\MfoPap;
 use App\Livewire\MyTargets;
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('target-approvals')->group(function () {
         Route::get('/', TargetApproval::class)->name('target.approvals.index');
         Route::get('/view/{user}', TargetApprovalView::class)->name('target.approvals.show');
+        Route::post('/acknowledge/{user}', [TargetAcknowledgementController::class, 'store'])->name('target.acknowledgement.store');
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
