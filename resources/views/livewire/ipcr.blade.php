@@ -73,7 +73,7 @@
                                 <label for="actual_accomplishment" class="form-label">Actual Accomplishments</label>
                                 <input wire:model="actual_accomplishment" type="text" id="actual_accomplishment"
                                     class="form-control @error('actual_accomplishment') is-invalid @enderror"
-                                    placeholder="Enter Office Name">
+                                    placeholder="">
                                 @error('actual_accomplishment')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
