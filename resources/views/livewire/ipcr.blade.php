@@ -51,6 +51,23 @@
                         <td colspan="8">No records</td>
                     </tr>
                 @endforelse
+
+                <tr>
+                    <td>STRATEGIC FUNCTION (46%)</td>
+                    <td colspan="7" class="text-end">{{ number_format($strategic, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>CORE FUNCTIONS (45%)</td>
+                    <td colspan="7" class="text-end">{{ number_format($core, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>SUPPORT FUNCTIONS (10%)</td>
+                    <td colspan="7" class="text-end">{{ number_format($support, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>TOTAL OVERALL RATING</td>
+                    <td colspan="7" class="text-end">{{ number_format($strategic + $core + $support, 2) }}</td>
+                </tr>
             </tbody>
         </table>
 
