@@ -72,15 +72,14 @@
             <span class="menu-header-text">Settings</span>
         </li>
 
-        @can('view-users')
-            <!-- Users -->
-            <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
-                <a href="{{ route('users.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                    <div data-i18n="Analytics">Users</div>
-                </a>
-            </li>
-        @endcan
+
+        <!-- Users -->
+        <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
+            <a href="{{ route('users.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Users</div>
+            </a>
+        </li>
 
         <li class="menu-item {{ request()->segment(1) == 'offices' ? 'active' : '' }}">
             <a href="{{ route('offices.index') }}" class="menu-link">

@@ -18,6 +18,6 @@ class Office extends Model
 
     public function mfo_paps()
     {
-        return $this->belongsToMany(MfoPap::class, 'mfo_pap_offices')->orderBy('id', 'asc');
+        return $this->belongsToMany(MfoPap::class, 'mfo_pap_offices')->withTimestamps()->orderBy('id', 'asc');
     }
 }

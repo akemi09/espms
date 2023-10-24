@@ -3,18 +3,43 @@
 namespace App\Livewire;
 
 use App\Models\Pcr;
-use App\Models\TargetAcknowledgement;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\TargetFuntion;
+use Livewire\Attributes\Rule;
+use Livewire\WithFileUploads;
+use App\Models\TargetAcknowledgement;
 
 class TargetApprovalView extends Component
 {
     use WithPagination;
 
+    use WithFileUploads;
+
     protected $paginationTheme = 'bootstrap';
-    
+
+    #[Rule('image|max:1024')] // 1MB Max
+    public $signatureImage;
+ 
+    public function save()  
+    {
+        $this->validate();
+
+        $imgFile = $this->signatureImage->store('signature');
+
+        TargetAcknowledgement::create([
+            'user_id' => auth()->user()->id,
+            'target_user_id' => 1,
+            'date_time' => now()->format('Y-m-d H:i:s'),
+            'sign_url' => $imgFile,
+        ]);
+
+        session()->flash('success', 'Success');
+
+        return redirect()->route('target.approvals.index');
+    }
+
     public User $user;
 
     public $isAcknowledge = 'no';

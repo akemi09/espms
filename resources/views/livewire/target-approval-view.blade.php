@@ -83,20 +83,18 @@
                     <h2>Acknowledged</h2>
                     <p>By: {{ $target_acknowledgement->user->name }}</p>
                     <p>Date/Time: {{ $target_acknowledgement->date_time }}</p>
-                    <p>Remarks: {{ $target_acknowledgement->remarks ?? 'N/A' }}</p>
+                    {{-- <p>Remarks: {{ $target_acknowledgement->remarks ?? 'N/A' }}</p> --}}
                     <p>Sign: </p>
-                    <img width="300px" height="100px"
+                    <img
                         src="{{ asset('storage/' . $target_acknowledgement->sign_url) }}" alt="Sign">
                 </div>
             @else
                 <div class="col-md-12 mt-5">
                     <h2>Confirmation</h2>
                 </div>
-                <form action="{{ route('target.acknowledgement.store', $user) }}" method="post"
-                    id="targetConfirmationForm">
-                    @csrf
+                <form wire:submit="save">
 
-                    <div class="form-group col-md-12">
+                    {{-- <div class="form-group col-md-12">
                         <label class="col-form-label font-weight-bold" for="remarks">{{ __('Remarks (optional)') }}
                         </label>
                         <div class="controls">
@@ -105,20 +103,21 @@
                         @error('remarks')
                             <p class="help-block text-danger">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="form-group col-md-12">
-                        <label class="col-form-label font-weight-bold" for="signatureImage">{{ __('eSign') }}
+                        <label class="col-form-label font-weight-bold" for="signatureImage">{{ __('Upload eSign') }}
                             <span class="font-weight-bold">*</span></label>
                         <div class="controls">
-                            <canvas id="signatureImage" name="signatureImage" class="border"></canvas>
-                            <textarea id="signatureDataUrl" name="signatureDataUrl" class="form-control" rows="5" style="display: none;"></textarea>
-                            @error('signatureDataUrl')
+                            <input type="file" id="signatureImage" wire:model="signatureImage" class="form-control @error('signatureImage') is-invalid @enderror">
+                            {{-- <canvas id="signatureImage" name="signatureImage" class="border"></canvas> --}}
+                            {{-- <textarea id="signatureDataUrl" name="signatureDataUrl" class="form-control" rows="5" style="display: none;"></textarea> --}}
+                            @error('signatureImage')
                                 <p class="help-block text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
                     </div>
-                    <div class="form-row">
+                    <div class="form-row mt-3">
                         <div class="form-group col-md-12">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="isAcknowledged"
@@ -144,153 +143,153 @@
     @push('scripts')
         <script>
             (function() {
-                window.requestAnimFrame = (function(callback) {
-                    return window.requestAnimationFrame ||
-                        window.webkitRequestAnimationFrame ||
-                        window.mozRequestAnimationFrame ||
-                        window.oRequestAnimationFrame ||
-                        window.msRequestAnimaitonFrame ||
-                        function(callback) {
-                            window.setTimeout(callback, 1000 / 60);
-                        };
-                })();
+            //     window.requestAnimFrame = (function(callback) {
+            //         return window.requestAnimationFrame ||
+            //             window.webkitRequestAnimationFrame ||
+            //             window.mozRequestAnimationFrame ||
+            //             window.oRequestAnimationFrame ||
+            //             window.msRequestAnimaitonFrame ||
+            //             function(callback) {
+            //                 window.setTimeout(callback, 1000 / 60);
+            //             };
+            //     })();
 
-                function fitToContainer(canvas) {
-                    canvas.style.width = '100%';
-                    canvas.style.height = '100%';
-                    canvas.width = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight;
-                }
+            //     function fitToContainer(canvas) {
+            //         canvas.style.width = '100%';
+            //         canvas.style.height = '100%';
+            //         canvas.width = canvas.offsetWidth;
+            //         canvas.height = canvas.offsetHeight;
+            //     }
 
-                var canvas = document.getElementById("signatureImage");
-                var ctx = canvas.getContext("2d");
-                fitToContainer(canvas);
-                ctx.strokeStyle = "#222222";
-                ctx.fillStyle = "#ffffff";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.lineWidth = 4;
+            //     var canvas = document.getElementById("signatureImage");
+            //     var ctx = canvas.getContext("2d");
+            //     fitToContainer(canvas);
+            //     ctx.strokeStyle = "#222222";
+            //     ctx.fillStyle = "#ffffff";
+            //     ctx.fillRect(0, 0, canvas.width, canvas.height);
+            //     ctx.lineWidth = 4;
 
-                var isPristine = true;
-                var drawing = false;
-                var mousePos = {
-                    x: 0,
-                    y: 0
-                };
-                var lastPos = mousePos;
+            //     var isPristine = true;
+            //     var drawing = false;
+            //     var mousePos = {
+            //         x: 0,
+            //         y: 0
+            //     };
+            //     var lastPos = mousePos;
 
-                canvas.onwheel = function(event) {
-                    event.preventDefault();
-                }
+            //     canvas.onwheel = function(event) {
+            //         event.preventDefault();
+            //     }
 
-                canvas.onmousewheel = function(event) {
-                    event.preventDefault();
-                }
+            //     canvas.onmousewheel = function(event) {
+            //         event.preventDefault();
+            //     }
 
-                canvas.addEventListener("mousedown", function(e) {
-                    drawing = true;
-                    lastPos = getMousePos(canvas, e);
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("mousedown", function(e) {
+            //         drawing = true;
+            //         lastPos = getMousePos(canvas, e);
+            //     }, {
+            //         passive: false
+            //     });
 
-                canvas.addEventListener("mouseup", function(e) {
-                    drawing = false;
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("mouseup", function(e) {
+            //         drawing = false;
+            //     }, {
+            //         passive: false
+            //     });
 
-                canvas.addEventListener("mousemove", function(e) {
-                    if (drawing) {
-                        isPristine = false;
-                    }
-                    mousePos = getMousePos(canvas, e);
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("mousemove", function(e) {
+            //         if (drawing) {
+            //             isPristine = false;
+            //         }
+            //         mousePos = getMousePos(canvas, e);
+            //     }, {
+            //         passive: false
+            //     });
 
-                canvas.addEventListener("touchstart", function(e) {
-                    isPristine = false;
-                    mousePos = getTouchPos(canvas, e);
-                    var touch = e.touches[0];
-                    var me = new MouseEvent("mousedown", {
-                        clientX: touch.clientX,
-                        clientY: touch.clientY
-                    });
-                    canvas.dispatchEvent(me);
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("touchstart", function(e) {
+            //         isPristine = false;
+            //         mousePos = getTouchPos(canvas, e);
+            //         var touch = e.touches[0];
+            //         var me = new MouseEvent("mousedown", {
+            //             clientX: touch.clientX,
+            //             clientY: touch.clientY
+            //         });
+            //         canvas.dispatchEvent(me);
+            //     }, {
+            //         passive: false
+            //     });
 
-                canvas.addEventListener("touchend", function(e) {
-                    var me = new MouseEvent("mouseup", {});
-                    canvas.dispatchEvent(me);
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("touchend", function(e) {
+            //         var me = new MouseEvent("mouseup", {});
+            //         canvas.dispatchEvent(me);
+            //     }, {
+            //         passive: false
+            //     });
 
-                canvas.addEventListener("touchmove", function(e) {
-                    var touch = e.touches[0];
-                    var me = new MouseEvent("mousemove", {
-                        clientX: touch.clientX,
-                        clientY: touch.clientY
-                    });
-                    canvas.dispatchEvent(me);
-                }, {
-                    passive: false
-                });
+            //     canvas.addEventListener("touchmove", function(e) {
+            //         var touch = e.touches[0];
+            //         var me = new MouseEvent("mousemove", {
+            //             clientX: touch.clientX,
+            //             clientY: touch.clientY
+            //         });
+            //         canvas.dispatchEvent(me);
+            //     }, {
+            //         passive: false
+            //     });
 
-                function getMousePos(canvasDom, mouseEvent) {
-                    var rect = canvasDom.getBoundingClientRect();
-                    return {
-                        x: mouseEvent.clientX - rect.left,
-                        y: mouseEvent.clientY - rect.top
-                    }
-                }
+            //     function getMousePos(canvasDom, mouseEvent) {
+            //         var rect = canvasDom.getBoundingClientRect();
+            //         return {
+            //             x: mouseEvent.clientX - rect.left,
+            //             y: mouseEvent.clientY - rect.top
+            //         }
+            //     }
 
-                function getTouchPos(canvasDom, touchEvent) {
-                    var rect = canvasDom.getBoundingClientRect();
-                    return {
-                        x: touchEvent.touches[0].clientX - rect.left,
-                        y: touchEvent.touches[0].clientY - rect.top
-                    }
-                }
+            //     function getTouchPos(canvasDom, touchEvent) {
+            //         var rect = canvasDom.getBoundingClientRect();
+            //         return {
+            //             x: touchEvent.touches[0].clientX - rect.left,
+            //             y: touchEvent.touches[0].clientY - rect.top
+            //         }
+            //     }
 
-                function renderCanvas() {
-                    if (drawing) {
-                        ctx.moveTo(lastPos.x, lastPos.y);
-                        ctx.lineTo(mousePos.x, mousePos.y);
-                        ctx.stroke();
-                        lastPos = mousePos;
-                    }
-                }
+            //     function renderCanvas() {
+            //         if (drawing) {
+            //             ctx.moveTo(lastPos.x, lastPos.y);
+            //             ctx.lineTo(mousePos.x, mousePos.y);
+            //             ctx.stroke();
+            //             lastPos = mousePos;
+            //         }
+            //     }
 
-                // Prevent scrolling when touching the canvas
-                document.body.addEventListener("touchstart", function(e) {
-                    if (e.target == canvas) {
-                        e.preventDefault();
-                    }
-                }, {
-                    passive: false
-                });
-                document.body.addEventListener("touchend", function(e) {
-                    if (e.target == canvas) {
-                        e.preventDefault();
-                    }
-                }, {
-                    passive: false
-                });
-                document.body.addEventListener("touchmove", function(e) {
-                    if (e.target == canvas) {
-                        e.preventDefault();
-                    }
-                }, {
-                    passive: false
-                });
+            //     // Prevent scrolling when touching the canvas
+            //     document.body.addEventListener("touchstart", function(e) {
+            //         if (e.target == canvas) {
+            //             e.preventDefault();
+            //         }
+            //     }, {
+            //         passive: false
+            //     });
+            //     document.body.addEventListener("touchend", function(e) {
+            //         if (e.target == canvas) {
+            //             e.preventDefault();
+            //         }
+            //     }, {
+            //         passive: false
+            //     });
+            //     document.body.addEventListener("touchmove", function(e) {
+            //         if (e.target == canvas) {
+            //             e.preventDefault();
+            //         }
+            //     }, {
+            //         passive: false
+            //     });
 
-                (function drawLoop() {
-                    requestAnimFrame(drawLoop);
-                    renderCanvas();
-                })();
+            //     (function drawLoop() {
+            //         requestAnimFrame(drawLoop);
+            //         renderCanvas();
+            //     })();
 
 
                 $('#targetConfirmationForm').submit(function(e) {

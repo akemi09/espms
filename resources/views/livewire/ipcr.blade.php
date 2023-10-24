@@ -48,7 +48,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4">No records</td>
+                        <td colspan="8">No records</td>
                     </tr>
                 @endforelse
             </tbody>
