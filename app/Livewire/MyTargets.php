@@ -3,8 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Pcr;
-use App\Models\TargetFuntion;
+use App\Models\Opcr;
 use Livewire\Component;
+use App\Models\TargetFuntion;
 
 class MyTargets extends Component
 {
@@ -40,6 +41,7 @@ class MyTargets extends Component
     public function destroy($key)
     {
         Pcr::where('id', $this->targets[$key]['id'])->delete();
+        Opcr::where('id', $this->targets[$key]['id'])->delete();
         unset($this->targets[$key]);
 
         session()->flash('success', 'Deleted.');
@@ -61,6 +63,15 @@ class MyTargets extends Component
 
         foreach ($this->targets as $target) {
             Pcr::updateOrCreate(
+                ['id' => $target['id'], 'user_id' => auth()->user()->id],
+                [
+                    'mfo_pap_id' => $this->mfo_pap_id,
+                    'targets' => $target['title'],
+                    'status' => Pcr::NEW,
+                ]
+            );
+
+            Opcr::updateOrCreate(
                 ['id' => $target['id'], 'user_id' => auth()->user()->id],
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
