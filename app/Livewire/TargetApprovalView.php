@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Pcr;
+use App\Models\Opcr;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -62,6 +63,7 @@ class TargetApprovalView extends Component
     public function approve($id)
     {
         Pcr::where('id', $id)->update(['status' => Pcr::APPROVED]);
+        Opcr::where('id', $id)->update(['status' => Pcr::APPROVED]);
 
         session()->flash('success', 'Approved.');
     }
@@ -69,6 +71,7 @@ class TargetApprovalView extends Component
     public function disapprove($id)
     {
         Pcr::where('id', $id)->update(['status' => Pcr::DISAPPROVED]);
+        Opcr::where('id', $id)->update(['status' => Pcr::DISAPPROVED]);
 
         session()->flash('success', 'Disapproved.');
     }
