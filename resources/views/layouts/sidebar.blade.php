@@ -72,15 +72,14 @@
             <span class="menu-header-text">Settings</span>
         </li>
 
-        @can('view-users')
-            <!-- Users -->
-            <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
-                <a href="{{ route('users.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                    <div data-i18n="Analytics">Users</div>
-                </a>
-            </li>
-        @endcan
+
+        <!-- Users -->
+        <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
+            <a href="{{ route('users.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Users</div>
+            </a>
+        </li>
 
         <li class="menu-item {{ request()->segment(1) == 'offices' ? 'active' : '' }}">
             <a href="{{ route('offices.index') }}" class="menu-link">
@@ -122,29 +121,17 @@
             </a>
         </li>
 
-        {{-- <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>
         </li>
 
         <!-- OPCR -->
-        <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Layouts">OPCR</div>
+        <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+            <a href="{{ route('opcr.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="OPCR">OPCR</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Vertical Form">Vertical Form</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Horizontal Form">Horizontal Form</div>
-                    </a>
-                </li>
-            </ul>
-        </li> --}}
+        </li>
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">IPCR</span>

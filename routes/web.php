@@ -1,17 +1,18 @@
 <?php
 
-use App\Livewire\User;
-use App\Livewire\Office;
-use App\Livewire\Dashboard;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\TargetAcknowledgementController;
-use App\Livewire\Calendar;
 use App\Livewire\Ipcr;
+use App\Livewire\Opcr;
+use App\Livewire\User;
 use App\Livewire\MfoPap;
+use App\Livewire\Office;
+use App\Livewire\Calendar;
+use App\Livewire\Dashboard;
 use App\Livewire\MyTargets;
 use App\Livewire\TargetApproval;
 use App\Livewire\TargetApprovalView;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TargetAcknowledgementController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -35,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
 
     Route::get('/ipcr', Ipcr::class)->name('ipcr.index');
+
+    Route::get('/opcr', Opcr::class)->name('opcr.index');
 
     Route::prefix('target-approvals')->group(function () {
         Route::get('/', TargetApproval::class)->name('target.approvals.index');

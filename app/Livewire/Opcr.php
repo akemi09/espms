@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\Pcr;
+use App\Models\Opcr as Op;
 use Livewire\Component;
 
-class Ipcr extends Component
+class Opcr extends Component
 {
     public $ipcr_id;
 
@@ -21,7 +21,7 @@ class Ipcr extends Component
 
     public function rate($id)
     {
-        $pcr = Pcr::find($id);
+        $pcr = Op::find($id);
         $this->ipcr_id = $pcr->id;
         $this->actual_accomplishment = $pcr->actual_accomplishments;
         $this->q1 = $pcr->q1;
@@ -32,7 +32,7 @@ class Ipcr extends Component
 
     public function save()
     {
-        $pcr = Pcr::find($this->ipcr_id);
+        $pcr = Op::find($this->ipcr_id);
         $pcr->actual_accomplishments = $this->actual_accomplishment;
         $pcr->q1 = ($this->q1 == "") ? null : $this->q1;
         $pcr->e2 = ($this->e2 == "") ? null : $this->e2;
@@ -50,13 +50,13 @@ class Ipcr extends Component
     public function ratings()
     {
         
-        $pcrs = Pcr::where('user_id', auth()->user()->id)
+        $pcrs = Op::where('user_id', auth()->user()->id)
             ->whereYear('created_at', now()->format('Y-m-d'))
-            ->where('status', Pcr::APPROVED)
+            ->where('status', Op::APPROVED)
             ->with('mfo_pap')
             ->get();
-        
-        if (count($pcrs) > 0)
+
+        if (count($pcrs))
         {
 
             $data = [];
@@ -94,9 +94,9 @@ class Ipcr extends Component
     public function render()
     {
         $this->ratings();
-        $pcrs = Pcr::where('user_id', auth()->user()->id)
+        $pcrs = Op::where('user_id', auth()->user()->id)
             ->whereYear('created_at', now()->format('Y-m-d'))
-            ->where('status', Pcr::APPROVED)
+            ->where('status', Op::APPROVED)
             ->get();
         return view('livewire.ipcr', compact('pcrs'));
     }

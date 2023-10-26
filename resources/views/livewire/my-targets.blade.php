@@ -31,7 +31,7 @@
                                                         <td>
                                                             <button wire:click="edit({{ $mp['id'] }})"
                                                                 class="btn btn-primary" data-bs-toggle="modal"
-                                                                data-bs-target="#editTargetModal">View</button>
+                                                                data-bs-target="#editTargetModal">Action</button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
