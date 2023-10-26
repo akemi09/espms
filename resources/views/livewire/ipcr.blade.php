@@ -53,7 +53,7 @@
                 @endforelse
 
                 <tr>
-                    <td>STRATEGIC FUNCTION (46%)</td>
+                    <td>STRATEGIC FUNCTION (45%)</td>
                     <td colspan="7" class="text-end">{{ number_format($strategic, 2) }}</td>
                 </tr>
                 <tr>
