@@ -1,0 +1,1 @@
+<span class="badge rounded-pill bg-label-{{$badgeColor}}">{{ $status }}</span>

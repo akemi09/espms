@@ -9,7 +9,7 @@
                 wire:keydown='search'>
         </div>
     </div>
-    <div class="table-responsive text-nowrap mt-3">
+    <div class="table-responsive mt-3">
         <table class="table mb-3">
             <thead>
                 <tr>
