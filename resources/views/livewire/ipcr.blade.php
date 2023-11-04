@@ -137,13 +137,8 @@
                             <div class="mb-3">
                                 <label for="a4" class="form-label">A4</label>
                                 <input wire:model="a4" type="number" id="a4"
-                                    class="form-control @error('a4') is-invalid @enderror"
-                                    placeholder="5">
-                                @error('a4')
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                    class="form-control"
+                                     readonly disabled>
                             </div>
                         </div>
                     </div>
