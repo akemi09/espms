@@ -20,8 +20,10 @@ class TargetApprovalView extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    #[Rule('image|max:1024')] // 1MB Max
+    #[Rule('required|image|max:1024')] // 1MB Max
     public $signatureImage;
+
+
  
     public function save()  
     {

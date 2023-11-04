@@ -32,12 +32,15 @@ class Ipcr extends Component
 
     public function save()
     {
+        $count = count(array_filter([$this->q1, $this->e2, $this->t3], 'strlen'));
+        
         $pcr = Pcr::find($this->ipcr_id);
         $pcr->actual_accomplishments = $this->actual_accomplishment;
         $pcr->q1 = ($this->q1 == "") ? null : $this->q1;
         $pcr->e2 = ($this->e2 == "") ? null : $this->e2;
         $pcr->t3 = ($this->t3 == "") ? null : $this->t3;
-        $pcr->a4 = ($this->a4 == "") ? null : $this->a4;
+        
+        $pcr->a4 = number_format(( (int)$this->q1 + (int)$this->e2 + (int)$this->t3 ) / $count, 2);
         $pcr->save();
         session()->flash('success', 'Updated');
     }
@@ -79,11 +82,11 @@ class Ipcr extends Component
     
             $groupwithcount = $pcr->map(function ($pcr) {
                 return [
-                    'count' => $pcr->where('q1', '!=', null)->count() + $pcr->where('e2', '!=', null)->count() + $pcr->where('t3', '!=', null)->count() + $pcr->where('a4', '!=', null)->count(),
-                    'total' => (int)$pcr->sum('q1') + (int)$pcr->sum('e2') + (int)$pcr->sum('t3') + (int)$pcr->sum('a4'),
+                    'count' => $pcr->where('a4', '!=', null)->count(),
+                    'total' => (float)$pcr->sum('a4'),
                 ];
             });
-    
+            
             $this->strategic = ($groupwithcount[1]['count'] != 0) ? ($groupwithcount[1]['total'] / $groupwithcount[1]['count']) * 0.45 : 0;
             $this->core = ($groupwithcount[2]['count'] != 0) ? ($groupwithcount[2]['total'] / $groupwithcount[2]['count']) * 0.45 : 0;
             $this->support = ($groupwithcount[3]['count'] != 0) ? ($groupwithcount[3]['total'] / $groupwithcount[3]['count']) * 0.10 : 0;
