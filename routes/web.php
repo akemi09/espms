@@ -9,14 +9,15 @@ use App\Livewire\Office;
 use App\Livewire\Calendar;
 use App\Livewire\Dashboard;
 use App\Livewire\MyTargets;
+use App\Livewire\RatedIpcr;
+use App\Livewire\RatedOpcr;
+use App\Livewire\ViewRatedIpcr;
+use App\Livewire\ViewRatedOpcr;
 use App\Livewire\TargetApproval;
 use App\Livewire\TargetApprovalView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TargetAcknowledgementController;
-use App\Livewire\RatedIpcr;
-use App\Livewire\RatedOpcr;
-use App\Livewire\ViewRatedIpcr;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
 
     Route::get('/rated-opcrs', RatedOpcr::class)->name('rated.opcr.index');
+    Route::get('/rated-opcr/{user}', ViewRatedOpcr::class)->name('rated.opcr.show');
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
 
