@@ -14,6 +14,9 @@ use App\Livewire\TargetApprovalView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TargetAcknowledgementController;
+use App\Livewire\RatedIpcr;
+use App\Livewire\RatedOpcr;
+use App\Livewire\ViewRatedIpcr;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -35,6 +38,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar', Calendar::class)->name('calendar.index');
 
     Route::get('/logs', Log::class)->name('logs.index');
+
+    Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
+    Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
+
+    Route::get('/rated-opcrs', RatedOpcr::class)->name('rated.opcr.index');
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
 
