@@ -1,7 +1,7 @@
 <div>
     <div class="col-md-12 text-center">
         <p class="fw-bold">
-            INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR)
+            OFFICE PERFORMACE COMMITMENT AND REVIEW (OPCR)
         </p>
     </div>
 
