@@ -27,6 +27,7 @@ class Office extends Component
 
     public function store()
     {
+        activity()->log('Create office');
         $this->validate();
 
         Offices::create([
@@ -39,6 +40,7 @@ class Office extends Component
 
     public function edit($id)
     {
+        activity()->log('Edit office');
         $office = Offices::find($id);
         $this->office_id = $office->id;
         $this->office_name = $office->name;
@@ -46,6 +48,7 @@ class Office extends Component
 
     public function update()
     {
+        activity()->log('Update office');
         $this->validate();
 
         $office = Offices::find($this->office_id);
@@ -58,6 +61,7 @@ class Office extends Component
 
     public function destroy($id)
     {
+        activity()->log('Delete office');
         Offices::find($id)->delete();
 
         session()->flash('success', 'Office deleted.');

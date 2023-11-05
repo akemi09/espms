@@ -86,7 +86,7 @@
                     {{-- <p>Remarks: {{ $target_acknowledgement->remarks ?? 'N/A' }}</p> --}}
                     <p>Sign: </p>
                     <img
-                        src="{{ asset('storage/' . $target_acknowledgement->sign_url) }}" alt="Sign">
+                        src="{{ asset('storage/' . $target_acknowledgement->sign_url) }}" alt="Sign" width="200" height="150">
                 </div>
             @else
                 <div class="col-md-12 mt-5">

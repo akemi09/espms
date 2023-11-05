@@ -21,6 +21,7 @@ class Ipcr extends Component
 
     public function rate($id)
     {
+        activity()->log('Rate IPCR');
         $pcr = Pcr::find($id);
         $this->ipcr_id = $pcr->id;
         $this->actual_accomplishment = $pcr->actual_accomplishments;
@@ -32,6 +33,7 @@ class Ipcr extends Component
 
     public function save()
     {
+        activity()->log('Create IPCR');
         $count = count(array_filter([$this->q1, $this->e2, $this->t3], 'strlen'));
         
         $pcr = Pcr::find($this->ipcr_id);

@@ -27,6 +27,7 @@ class TargetApprovalView extends Component
  
     public function save()  
     {
+        activity()->log('Acknowledge targets');
         $this->validate();
 
         $imgFile = $this->signatureImage->store('signature');
@@ -64,6 +65,7 @@ class TargetApprovalView extends Component
 
     public function approve($id)
     {
+        activity()->log('Approved target');
         Pcr::where('id', $id)->update(['status' => Pcr::APPROVED]);
         Opcr::where('id', $id)->update(['status' => Pcr::APPROVED]);
 
@@ -72,6 +74,7 @@ class TargetApprovalView extends Component
 
     public function disapprove($id)
     {
+        activity()->log('Disapproved target');
         Pcr::where('id', $id)->update(['status' => Pcr::DISAPPROVED]);
         Opcr::where('id', $id)->update(['status' => Pcr::DISAPPROVED]);
 

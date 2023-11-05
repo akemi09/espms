@@ -21,6 +21,7 @@ class Opcr extends Component
 
     public function rate($id)
     {
+        activity()->log('Rate OPCR');
         $pcr = Op::find($id);
         $this->ipcr_id = $pcr->id;
         $this->actual_accomplishment = $pcr->actual_accomplishments;
@@ -32,6 +33,7 @@ class Opcr extends Component
 
     public function save()
     {
+        activity()->log('Save IPCR');
         $count = count(array_filter([$this->q1, $this->e2, $this->t3], 'strlen'));
         $pcr = Op::find($this->ipcr_id);
         $pcr->actual_accomplishments = $this->actual_accomplishment;

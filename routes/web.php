@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Log;
 use App\Livewire\Ipcr;
 use App\Livewire\Opcr;
 use App\Livewire\User;
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mfo-pap', MfoPap::class)->name('mfo-pap.index');
 
     Route::get('/calendar', Calendar::class)->name('calendar.index');
+
+    Route::get('/logs', Log::class)->name('logs.index');
 
     Route::get('/targets', MyTargets::class)->name('my-targets.index');
 

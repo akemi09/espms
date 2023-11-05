@@ -102,6 +102,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->segment(1) == 'logs' ? 'active' : '' }}">
+            <a href="{{ route('logs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Logs</div>
+            </a>
+        </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SUCCESS INDICATORS</span>
         </li>

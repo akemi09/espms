@@ -41,7 +41,7 @@ class MfoPap extends Component
 
     public function store()
     {
-
+        activity()->log('Create MFO/PAP');
         $this->validate();
 
         $mfo_pap = MfoPaps::create([
@@ -72,6 +72,7 @@ class MfoPap extends Component
 
     public function edit($id)
     {
+        activity()->log('Edit MFO/PAP');
         $mfo_pap = MfoPaps::find($id);
         $this->mfo_pap_id = $mfo_pap->id;
         $this->title = $mfo_pap->title;
@@ -90,6 +91,7 @@ class MfoPap extends Component
 
     public function update()
     {
+        activity()->log('Update MFO/PAP');
         $this->validate();
 
         $mfo_pap = MfoPaps::find($this->mfo_pap_id);
@@ -121,6 +123,7 @@ class MfoPap extends Component
 
     public function destroy($id)
     {
+        activity()->log('Delete MFO/PAP');
         MfoPaps::find($id)->delete();
 
         session()->flash('success', 'MFO/PAP deleted.');

@@ -24,6 +24,7 @@ class MyTargets extends Component
 
     public function edit($id)
     {
+        activity()->log('Edit target');
         $this->mfo_pap_id = $id;
         $pcrs = Pcr::where('user_id', auth()->user()->id)
             ->where('mfo_pap_id', $id)
@@ -40,6 +41,7 @@ class MyTargets extends Component
 
     public function destroy($key)
     {
+        activity()->log('Delete target');
         Pcr::where('id', $this->targets[$key]['id'])->delete();
         Opcr::where('id', $this->targets[$key]['id'])->delete();
         unset($this->targets[$key]);
@@ -58,7 +60,7 @@ class MyTargets extends Component
 
     public function update()
     {
-        
+        activity()->log('Update target');
         $this->validate();
 
         foreach ($this->targets as $target) {
