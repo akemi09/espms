@@ -69,6 +69,7 @@ class ViewRatedIpcr extends Component
 
     public function render()
     {
+        activity()->log('View rated IPCR');
         $this->getRating();
         return view('livewire.view-rated-ipcr');
     }

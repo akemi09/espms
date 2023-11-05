@@ -69,6 +69,7 @@ class ViewRatedOpcr extends Component
 
     public function render()
     {
+        activity()->log('View rated OPCR');
         $this->getRating();
         return view('livewire.view-rated-opcr');
     }
