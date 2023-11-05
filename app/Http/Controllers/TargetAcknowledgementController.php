@@ -11,6 +11,7 @@ class TargetAcknowledgementController extends Controller
 {
     public function store(Request $request, User $user)
     {
+        activity()->log('Target acknowledged');
         $data = $request->validate([
             'isAcknowledged' => 'required|accepted',
             'remarks' => 'nullable',

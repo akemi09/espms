@@ -102,11 +102,41 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->segment(1) == 'logs' ? 'active' : '' }}">
+            <a href="{{ route('logs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Logs</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Reports</span>
+        </li>
+
+        <li class="menu-item {{ in_array(request()->segment(1), ['rated-ipcrs', 'rated-opcrs']) ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Reports">Reports</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->segment(1) == 'rated-ipcrs' ? 'active' : '' }}">
+                    <a href="{{ route('rated.ipcr.index') }}" class="menu-link">
+                        <div data-i18n="Rated IPCS">Rated IPCR</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->segment(1) == 'rated-opcrs' ? 'active' : '' }}">
+                    <a href="{{ route('rated.opcr.index') }}" class="menu-link">
+                        <div data-i18n="Rated OPCR">Rated OPCR</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SUCCESS INDICATORS</span>
         </li>
 
-         <!-- TARGETS -->
+        <!-- TARGETS -->
         <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
             <a href="{{ route('my-targets.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>

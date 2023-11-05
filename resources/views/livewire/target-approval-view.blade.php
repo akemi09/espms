@@ -86,7 +86,7 @@
                     {{-- <p>Remarks: {{ $target_acknowledgement->remarks ?? 'N/A' }}</p> --}}
                     <p>Sign: </p>
                     <img
-                        src="{{ asset('storage/' . $target_acknowledgement->sign_url) }}" alt="Sign">
+                        src="{{ asset('storage/' . $target_acknowledgement->sign_url) }}" alt="Sign" width="200" height="150">
                 </div>
             @else
                 <div class="col-md-12 mt-5">
@@ -114,23 +114,13 @@
                             @error('signatureImage')
                                 <p class="help-block text-danger">{{ $message }}</p>
                             @enderror
+                            <div wire:loading wire:target="signatureImage">Uploading...</div>
                         </div>
 
                     </div>
-                    <div class="form-row mt-3">
-                        <div class="form-group col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="isAcknowledged"
-                                    id="isAcknowledged" value="true">
-                                <label class="custom-control-label"
-                                    for="isAcknowledged">{{ __('Check here to confirm') }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12 text-end">
-                        <button id="submitBtn" class="btn btn-primary fw-bold px-3" type="submit"
-                            {{ old('isAcknowledged') ? '' : 'disabled' }}>
-                            Submit
+                    <div class="form-group col-md-12 text-end mt-3">
+                        <button id="submitBtn" class="btn btn-primary fw-bold px-3" type="submit">
+                            Confirm
                         </button>
                     </div>
                 </form>

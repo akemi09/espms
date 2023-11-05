@@ -35,6 +35,7 @@ class Calendar extends Component
 
     public function store()
     {
+        activity()->log('Create calendar');
         $this->validate();
 
         $isDefined = CalendarRange::whereIn('date_range', [$this->event_from, $this->event_end])->first();
@@ -69,6 +70,7 @@ class Calendar extends Component
 
     public function edit($id)
     {
+        activity()->log('Edit calendar');
         $calendar = Calendars::find($id);
         $this->event_id = $calendar->id;
         $this->event_name = $calendar->event_name;
@@ -78,6 +80,7 @@ class Calendar extends Component
 
     public function update()
     {
+        activity()->log('Update calendar');
         $this->validate();
 
         $calendar = Calendars::find($this->event_id);
@@ -93,6 +96,7 @@ class Calendar extends Component
 
     public function destroy($id)
     {
+        activity()->log('Delete calendar');
         Calendars::find($id)->delete();
 
         session()->flash('success', 'Event deleted.');

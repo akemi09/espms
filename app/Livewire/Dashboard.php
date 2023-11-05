@@ -10,6 +10,7 @@ class Dashboard extends Component
 {
     public function render()
     {
+        activity()->log('Accessed calendar');
         $calendars = Calendar::whereYear('created_at', Carbon::now()->year)->get();
         $calendar_data_array = [];
         foreach ($calendars as $calendar) {

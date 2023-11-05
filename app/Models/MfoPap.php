@@ -31,4 +31,9 @@ class MfoPap extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ipcrs()
+    {
+        return $this->hasMany(Pcr::class);
+    }
 }

@@ -16,7 +16,8 @@ class TargetApproval extends Component
     {
         $pcr_users = Pcr::select('user_id')
             ->whereYear('created_at', now()->format('Y'))
-            ->distinct()
+            ->with('user')
+            ->groupBy('user_id')
             ->paginate(10);
 
         return view('livewire.target-approval', compact('pcr_users'));

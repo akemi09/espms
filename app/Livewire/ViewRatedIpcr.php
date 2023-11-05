@@ -3,59 +3,31 @@
 namespace App\Livewire;
 
 use App\Models\Pcr;
+use App\Models\User;
 use Livewire\Component;
 
-class Ipcr extends Component
+class ViewRatedIpcr extends Component
 {
-    public $ipcr_id;
+    public User $user;
 
-    public $actual_accomplishment = "";
-    public $q1;
-    public $e2;
-    public $t3;
-    public $a4;
+    public $ipcr;
 
-    public $strategic = 0;
-    public $core = 0;
-    public $support = 0;
+    public $strategic;
+    public $core;
+    public $support;
 
-    public function rate($id)
+    public function mount(User $user)
     {
-        activity()->log('Rate IPCR');
-        $pcr = Pcr::find($id);
-        $this->ipcr_id = $pcr->id;
-        $this->actual_accomplishment = $pcr->actual_accomplishments;
-        $this->q1 = $pcr->q1;
-        $this->e2 = $pcr->e2;
-        $this->t3 = $pcr->t3;
-        $this->a4 = $pcr->a4;
+        $this->user = $user;
+
+        $mfo_paps = Pcr::where('user_id', $user->id)->with('mfo_pap')->get();
+
+        $this->ipcr = collect($mfo_paps)->groupBy(['mfo_pap.target_function.name', 'mfo_pap.title']);                                                                   
     }
 
-    public function save()
+    public function getRating()
     {
-        activity()->log('Create IPCR');
-        $count = count(array_filter([$this->q1, $this->e2, $this->t3], 'strlen'));
-        
-        $pcr = Pcr::find($this->ipcr_id);
-        $pcr->actual_accomplishments = $this->actual_accomplishment;
-        $pcr->q1 = ($this->q1 == "") ? null : $this->q1;
-        $pcr->e2 = ($this->e2 == "") ? null : $this->e2;
-        $pcr->t3 = ($this->t3 == "") ? null : $this->t3;
-        
-        $pcr->a4 = number_format(( (int)$this->q1 + (int)$this->e2 + (int)$this->t3 ) / $count, 2);
-        $pcr->save();
-        session()->flash('success', 'Updated');
-    }
-
-    public function cancel()
-    {
-        $this->ipcr_id = null;
-    }
-
-    public function ratings()
-    {
-        
-        $pcrs = Pcr::where('user_id', auth()->user()->id)
+        $pcrs = Pcr::where('user_id', $this->user->id)
             ->whereYear('created_at', now()->format('Y-m-d'))
             ->where('status', Pcr::APPROVED)
             ->with('mfo_pap')
@@ -93,16 +65,11 @@ class Ipcr extends Component
             $this->core = ($groupwithcount[2]['count'] != 0) ? ($groupwithcount[2]['total'] / $groupwithcount[2]['count']) * 0.45 : 0;
             $this->support = ($groupwithcount[3]['count'] != 0) ? ($groupwithcount[3]['total'] / $groupwithcount[3]['count']) * 0.10 : 0;
         }
-
     }
 
     public function render()
     {
-        $this->ratings();
-        $pcrs = Pcr::where('user_id', auth()->user()->id)
-            ->whereYear('created_at', now()->format('Y-m-d'))
-            ->where('status', Pcr::APPROVED)
-            ->get();
-        return view('livewire.ipcr', compact('pcrs'));
+        $this->getRating();
+        return view('livewire.view-rated-ipcr');
     }
 }

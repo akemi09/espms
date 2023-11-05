@@ -33,6 +33,7 @@ class User extends Component
 
     public function store()
     {
+        activity()->log('Create user');
         $this->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email:filter|max:250|unique:users',
@@ -61,6 +62,7 @@ class User extends Component
 
     public function edit($id)
     {
+        activity()->log('Edit user');
         $user = Users::find($id);
         $this->user_id = $user->id;
         $this->name = $user->name;
@@ -75,6 +77,7 @@ class User extends Component
 
     public function update()
     {
+        activity()->log('Update user');
         $data = $this->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email:filter|string|unique:users,email,'.$this->user_id,
@@ -103,6 +106,7 @@ class User extends Component
 
     public function destroy($id)
     {
+        activity()->log('Delete user');
         if ($id == 1)
         {
             abort(403);
