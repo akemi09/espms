@@ -18,6 +18,7 @@ use App\Livewire\TargetApprovalView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TargetAcknowledgementController;
+use App\Livewire\RolesAndPermission;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -30,7 +31,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-    Route::get('/users', User::class)->name('users.index');
+    Route::get('/users', User::class)->middleware(['permission:admin.read'])->name('users.index');
 
     Route::get('/offices', Office::class)->name('offices.index');
 
@@ -39,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar', Calendar::class)->name('calendar.index');
 
     Route::get('/logs', Log::class)->name('logs.index');
+
+    Route::get('/roles', RolesAndPermission::class)->name('roles.index');
 
     Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
     Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');

@@ -3,15 +3,13 @@
         <table class="table mb-3">
             <thead>
                 <tr>
-                    <th>Detail</th>
-                    <th>By</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($logs as $log)
                     <tr>
-                        <td>{{ $log->description }}</td>
-                        <td>{{ $log->causer->name }}</td>
+                        <td>{{ $log->causer->name }} {{ $log->description }}</td>
                     </tr>
                 @empty
                     <tr>
@@ -22,7 +20,6 @@
             <tfoot>
                 <tr>
                     <th>Detail</th>
-                    <th>By</th>
                 </tr>
             </tfoot>
         </table>

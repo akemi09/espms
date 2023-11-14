@@ -68,47 +68,56 @@
             </a>
         </li>
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Settings</span>
-        </li>
+        @can('admin.read')
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Settings</span>
+            </li>
 
+            <!-- Users -->
+            <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="Analytics">Users</div>
+                </a>
+            </li>
 
-        <!-- Users -->
-        <li class="menu-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Analytics">Users</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->segment(1) == 'offices' ? 'active' : '' }}">
+                <a href="{{ route('offices.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-buildings"></i>
+                    <div data-i18n="Analytics">Offices</div>
+                </a>
+            </li>
 
-        <li class="menu-item {{ request()->segment(1) == 'offices' ? 'active' : '' }}">
-            <a href="{{ route('offices.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-buildings"></i>
-                <div data-i18n="Analytics">Offices</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->segment(1) == 'mfo-pap' ? 'active' : '' }}">
+                <a href="{{ route('mfo-pap.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-category"></i>
+                    <div data-i18n="Analytics">MFO/PAP</div>
+                </a>
+            </li>
 
-        <li class="menu-item {{ request()->segment(1) == 'mfo-pap' ? 'active' : '' }}">
-            <a href="{{ route('mfo-pap.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-category"></i>
-                <div data-i18n="Analytics">MFO/PAP</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->segment(1) == 'calendar' ? 'active' : '' }}">
+                <a href="{{ route('calendar.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i>
+                    <div data-i18n="Analytics">Calendar</div>
+                </a>
+            </li>
 
-        <li class="menu-item {{ request()->segment(1) == 'calendar' ? 'active' : '' }}">
-            <a href="{{ route('calendar.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                <div data-i18n="Analytics">Calendar</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->segment(1) == 'logs' ? 'active' : '' }}">
+                <a href="{{ route('logs.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Analytics">Logs</div>
+                </a>
+            </li>
 
-        <li class="menu-item {{ request()->segment(1) == 'logs' ? 'active' : '' }}">
-            <a href="{{ route('logs.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Analytics">Logs</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->segment(1) == 'roles' ? 'active' : '' }}">
+                <a href="{{ route('roles.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-key"></i>
+                    <div data-i18n="Roles">Roles and Permission</div>
+                </a>
+            </li>
+        @endcan
 
+        @can('pmt.read')
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Reports</span>
         </li>
@@ -131,6 +140,7 @@
                 </li>
             </ul>
         </li>
+        @endcan
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SUCCESS INDICATORS</span>
@@ -144,12 +154,14 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->segment(1) == 'target-approvals' ? 'active' : '' }}">
-            <a href="{{ route('target.approvals.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Target Approvals">Target Approvals</div>
-            </a>
-        </li>
+        @can('pmt.read')
+            <li class="menu-item {{ request()->segment(1) == 'target-approvals' ? 'active' : '' }}">
+                <a href="{{ route('target.approvals.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="Target Approvals">Target Approvals</div>
+                </a>
+            </li>
+        @endcan
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>

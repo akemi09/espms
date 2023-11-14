@@ -19,25 +19,25 @@ class UserSeeder extends Seeder
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
                 'office_id' => 1,
-                'role' => 'Admin',
+                'role' => 'admin',
             ],
             [
                 'name' => 'PMT User',
                 'email' => 'pmt@example.com',
                 'office_id' => 1,
-                'role' => 'PMT',
+                'role' => 'pmt',
             ],
             [
                 'name' => 'Office Head User',
                 'email' => 'officehead@example.com',
                 'office_id' => 1,
-                'role' => 'Office Head',
+                'role' => 'office-head',
             ],
             [
                 'name' => 'Rater User',
                 'email' => 'rater@example.com',
                 'office_id' => 1,
-                'role' => 'Rater',
+                'role' => 'rater',
             ]
         ];
 

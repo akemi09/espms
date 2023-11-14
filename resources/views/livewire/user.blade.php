@@ -154,7 +154,7 @@
                                             type="checkbox" value="{{ $role['name'] }}" id="role{{ $key }}">
 
                                         <label class="form-check-label" for="role{{ $key }}">
-                                            {{ $role['name'] }}
+                                            {{ Str::upper($role['name']) }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -287,7 +287,7 @@
                                             id="role{{ $key }}" @checked(in_array($role['name'], $roles))>
 
                                         <label class="form-check-label" for="role{{ $key }}">
-                                            {{ $role['name'] }}
+                                            {{ Str::upper($role['name']) }}
                                         </label>
                                     </div>
                                 @endforeach
