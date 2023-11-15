@@ -109,6 +109,46 @@
                         <td colspan="6">TOTAL OVERALL RATING</td>
                         <td colspan="2">{{ number_format($strategic + $core + $support, 2) }}</td>
                     </tr>
+
+                    <tr>
+                        <td colspan="8">Comments and Recommendation for Development Purposes</td>
+                    </tr>
+
+
+                    <tr class="text-center">
+                        <td>Discuss with:</td>
+                        <td>Assessed by:</td>
+                        <td>Noted by:</td>
+                        <td colspan="4">Approved by:</td>
+                        <td>Date:</td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="2">&nbsp;</td>
+                        <td>I certify that I discussed my assessment of the performance with the employee</td>
+                        <td rowspan="2">&nbsp;</td>
+                        <td colspan="4" rowspan="2">&nbsp;</td>
+                        <td rowspan="2">&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr class="text-center">
+                        <td>ICHELLE F. BALUIS</td>
+                        <td>CHALLIZ DELIMA-OMOROG, DIT</td>
+                        <td>ESTELITO R. CLEMENTE, PhD</td>
+                        <td colspan="4">DULCE F. ATIAN, PhD</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>Employee</td>
+                        <td>Dean</td>
+                        <td>VPAA</td>
+                        <td colspan="4">Officer-in-charge</td>
+                        <td>&nbsp;</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
