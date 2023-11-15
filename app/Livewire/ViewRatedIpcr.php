@@ -5,9 +5,14 @@ namespace App\Livewire;
 use App\Models\Pcr;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\Signatories;
+use Livewire\Attributes\Rule;
+use Livewire\WithFileUploads;
 
 class ViewRatedIpcr extends Component
 {
+    use WithFileUploads;
+    
     public User $user;
 
     public $ipcr;
@@ -16,13 +21,49 @@ class ViewRatedIpcr extends Component
     public $core;
     public $support;
 
+    public $signed = '';
+
+ 
+    #[Rule('image|max:1024')] // 1MB Max
+    public $esign;
+ 
+    public function save()
+    {
+        $this->validate();
+
+        $eSign = $this->esign->store('report-esign');
+        Signatories::create([
+            'pcr_owner_id' => $this->user->id,
+            'signatory_id' => auth()->user()->id,
+            'signature' => $eSign
+        ]);
+
+        session()->flash('success', 'Updated.');
+        $this->redirect(RatedIpcr::class);
+    }
+
     public function mount(User $user)
     {
         $this->user = $user;
 
         $mfo_paps = Pcr::where('user_id', $user->id)->with('mfo_pap')->get();
 
-        $this->ipcr = collect($mfo_paps)->groupBy(['mfo_pap.target_function.name', 'mfo_pap.title']);                                                                   
+        $this->ipcr = collect($mfo_paps)->groupBy(['mfo_pap.target_function.name', 'mfo_pap.title']);    
+        
+        $this->checkIfSigned();
+    }
+
+    public function checkIfSigned()
+    {
+
+        $signed = Signatories::where('pcr_owner_id', $this->user->id)
+            ->where('signatory_id', auth()->user()->id)
+            ->first();
+
+        if ($signed)
+        {
+            $this->signed = $signed->signature;
+        }
     }
 
     public function getRating()

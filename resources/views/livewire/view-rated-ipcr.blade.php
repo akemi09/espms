@@ -73,7 +73,7 @@
                         </tr>
                         @foreach ($mfoPaps as $mfoPap => $targets)
                             <tr>
-                                <td rowspan="{{count($targets) + 1}}">{{ $mfoPap }}</td>
+                                <td rowspan="{{ count($targets) + 1 }}">{{ $mfoPap }}</td>
                             </tr>
                             @foreach ($targets as $target)
                                 <tr>
@@ -87,7 +87,7 @@
                                 </tr>
                             @endforeach
                         @endforeach
-                        
+
                     @empty
                         <tr>
                             <td colspan="8">No results</td>
@@ -124,7 +124,21 @@
                     </tr>
 
                     <tr>
-                        <td rowspan="2">&nbsp;</td>
+                        <td rowspan="2">
+                            @if ($signed != '')
+                                <img src="{{ asset('storage/' . $signed) }}" alt="signature">
+                            @else
+                                <form wire:submit="save">
+                                    <input type="file" wire:model="esign">
+
+                                    <button type="submit" class="btn btn-primary btn-sm mt-1">Save eSign</button>
+                                    @error('eSign')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
+                                    <div wire:loading wire:target="esign">Uploading...</div>
+                                </form>
+                            @endif
+                        </td>
                         <td>I certify that I discussed my assessment of the performance with the employee</td>
                         <td rowspan="2">&nbsp;</td>
                         <td colspan="4" rowspan="2">&nbsp;</td>
@@ -136,20 +150,20 @@
                     </tr>
 
                     <tr class="text-center">
-                        <td>ICHELLE F. BALUIS</td>
+                        <td>{{ auth()->user()->name }}</td>
                         <td>CHALLIZ DELIMA-OMOROG, DIT</td>
                         <td>ESTELITO R. CLEMENTE, PhD</td>
                         <td colspan="4">DULCE F. ATIAN, PhD</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr class="text-center">
-                        <td>Employee</td>
+                        <td>{{ auth()->user()->designation }}</td>
                         <td>Dean</td>
                         <td>VPAA</td>
                         <td colspan="4">Officer-in-charge</td>
                         <td>&nbsp;</td>
                     </tr>
-                   
+
                 </tbody>
             </table>
         </div>
