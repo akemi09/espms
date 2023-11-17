@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GeneratePdfController;
 use App\Livewire\Log;
 use App\Livewire\Ipcr;
 use App\Livewire\Opcr;
@@ -60,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/view/{user}', TargetApprovalView::class)->name('target.approvals.show');
         Route::post('/acknowledge/{user}', [TargetAcknowledgementController::class, 'store'])->name('target.acknowledgement.store');
     });
+
+    Route::get('/report/{type}/{user}', GeneratePdfController::class)->name('generate.report');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

@@ -1,10 +1,13 @@
-<div>
-    <div class="row">
-
-        <div class="col-md-12">
-            <a href="{{ route('generate.report', ['type' => 'ipcr', 'user' => $user->id]) }}" class="btn btn-link float-end"><i class="menu-icon tf-icons bx bx-download"></i>Download as PDF</a>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
     <div class="col-md-12 text-center">
         <p class="fw-bold">
             INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR)
@@ -131,18 +134,8 @@
 
                     <tr>
                         <td rowspan="2">
-                            @if ($signed != '')
-                                <img src="{{ asset('/storage/' . $signed) }}" alt="signature" width="150px" height="100px">
-                            @else
-                                <form wire:submit="save">
-                                    <input type="file" wire:model="esign">
-
-                                    <button type="submit" class="btn btn-primary btn-sm mt-1">Save eSign</button>
-                                    @error('eSign')
-                                        <span class="error">{{ $message }}</span>
-                                    @enderror
-                                    <div wire:loading wire:target="esign">Uploading...</div>
-                                </form>
+                            @if($signed != "")
+                            <img src="{{ public_path('storage/' . $signed) }}" alt="signature" width="150px" height="100px">
                             @endif
                         </td>
                         <td>I certify that I discussed my assessment of the performance with the employee</td>
@@ -174,4 +167,5 @@
             </table>
         </div>
     </div>
-</div>
+</body>
+</html>
