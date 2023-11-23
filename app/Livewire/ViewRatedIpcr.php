@@ -73,7 +73,7 @@ class ViewRatedIpcr extends Component
             ->where('status', Pcr::APPROVED)
             ->with('mfo_pap')
             ->get();
-        
+
         if (count($pcrs) > 0)
         {
 
@@ -101,10 +101,22 @@ class ViewRatedIpcr extends Component
                     'total' => (float)$pcr->sum('a4'),
                 ];
             });
+
+            if (isset($groupwithcount[1]))
+            {
+                $this->strategic = ($groupwithcount[1]['count'] != 0) ? ($groupwithcount[1]['total'] / $groupwithcount[1]['count']) * 0.45 : 0;
+            }
+
+            if (isset($groupwithcount[2]))
+            {
+                $this->core = ($groupwithcount[2]['count'] != 0) ? ($groupwithcount[2]['total'] / $groupwithcount[2]['count']) * 0.45 : 0;
+            }
             
-            $this->strategic = ($groupwithcount[1]['count'] != 0) ? ($groupwithcount[1]['total'] / $groupwithcount[1]['count']) * 0.45 : 0;
-            $this->core = ($groupwithcount[2]['count'] != 0) ? ($groupwithcount[2]['total'] / $groupwithcount[2]['count']) * 0.45 : 0;
-            $this->support = ($groupwithcount[3]['count'] != 0) ? ($groupwithcount[3]['total'] / $groupwithcount[3]['count']) * 0.10 : 0;
+            if (isset($groupwithcount[3]))
+            {
+                $this->support = ($groupwithcount[3]['count'] != 0) ? ($groupwithcount[3]['total'] / $groupwithcount[3]['count']) * 0.10 : 0;
+            }
+            
         }
     }
 

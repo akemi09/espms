@@ -142,10 +142,12 @@
         </li>
         @endcan
 
+        
+        @can('office-head.read')
+        
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SUCCESS INDICATORS</span>
         </li>
-
         <!-- TARGETS -->
         <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
             <a href="{{ route('my-targets.index') }}" class="menu-link">
@@ -153,6 +155,7 @@
                 <div data-i18n="My Targets">My Targets</div>
             </a>
         </li>
+        @endcan
 
         @can('pmt.read')
             <li class="menu-item {{ request()->segment(1) == 'target-approvals' ? 'active' : '' }}">
@@ -163,6 +166,7 @@
             </li>
         @endcan
 
+        @can('office-head.read')
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">OPCR</span>
         </li>
@@ -186,6 +190,7 @@
                 <div data-i18n="Analytics">IPCR</div>
             </a>
         </li>
+        @endcan
 
     </ul>
 

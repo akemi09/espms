@@ -27,7 +27,7 @@
                                             <tbody>
                                                 @foreach ($mfo_pap as $mp)
                                                     <tr>
-                                                        <td width="80%">{{ $loop->index + 1 }}. {{ $mp['title'] }}</td>
+                                                        <td width="80%">{{ $mp['title'] }}</td>
                                                         <td>
                                                             <button wire:click="edit({{ $mp['id'] }})"
                                                                 class="btn btn-primary" data-bs-toggle="modal"
@@ -43,6 +43,14 @@
                         </div>
                     </div>
                 @endforeach
+
+                {{-- @if ($forApproval == 'yes')
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                        <button class="btn btn-primary float-end">Submit for approval</button>
+                    </div>
+                </div>
+                @endif --}}
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@
     <!-- Edit Target Modal -->
     <div class="modal fade" data-bs-backdrop="static" id="editTargetModal" tabindex="-1" style="display: none;"
         aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form>
                     <div class="modal-header">
@@ -65,19 +73,32 @@
                                 @if (count($targets) > 0)
                                     @foreach ($targets as $key => $target)
                                         <input type="hidden" wire:model="targets.{{ $key }}.id">
-                                        <input wire:model="targets.{{ $key }}.title" type="text"
-                                            id="targets.{{ $key }}.title"
-                                            class="mb-2 form-control @error('targets.' . $key . '.title') is-invalid @enderror">
-                                        <button type="buttn" wire:click.prevent="destroy({{$key}})" class="mb-2 btn btn-danger btn-sm">remove</button>
+                                        <div class="row">
+                                            <label for="targets.{{ $key }}.parent">Parent</label>
+                                            <select class="form-control" wire:model="targets.{{ $key }}.parent_id"
+                                                id="targets.{{ $key }}.parent">
+                                                <option value="">None</option>
+                                                @foreach ($my_targets as $mt)
+                                                <option value="{{ $mt->id }}">{{ $mt->targets }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <input wire:model="targets.{{ $key }}.title" type="text"
+                                                id="targets.{{ $key }}.title"
+                                                class="mb-2 form-control @error('targets.' . $key . '.title') is-invalid @enderror">
+                                        </div>
+                                        <button type="buttn" wire:click.prevent="destroy({{ $key }})"
+                                            class="mb-2 btn btn-danger btn-sm">remove</button>
                                         @error('targets.' . $key . '.title')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     @endforeach
-
                                 @endif
-                                <button type="button" class="btn btn-primary mt-2 float-end" wire:click="addTarget">add</button>
+                                <button type="button" class="btn btn-primary mt-2 float-end"
+                                    wire:click="addTarget">add</button>
                             </div>
                         </div>
                     </div>

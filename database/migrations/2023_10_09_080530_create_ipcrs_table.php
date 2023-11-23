@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('alloted_budget')->nullable();
             $table->string('accoutable')->nullable();
             $table->text('actual_accomplishments')->nullable();
-            $table->string('q1')->nullable();
-            $table->string('e2')->nullable();
-            $table->string('t3')->nullable();
+            $table->string('q1')->default(0)->nullable();
+            $table->string('e2')->default(0)->nullable();
+            $table->string('t3')->default(0)->nullable();
             $table->string('a4')->nullable();
             $table->text('remarks')->nullable();
             $table->integer('status')->nullable();

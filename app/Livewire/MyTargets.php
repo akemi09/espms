@@ -11,13 +11,25 @@ class MyTargets extends Component
 {
     public $mfo_pap_id;
     public $targets = [];
+    public $forApproval = 'no';
 
+    public function mount()
+    {
+        $result = Pcr::where('user_id', auth()->user()->id)
+            ->where('status', Pcr::NEW)->first();
+
+        if($result)
+        {
+            $this->forApproval = 'yes';
+        }
+    }
 
     public function addTarget()
     {
         array_push($this->targets, [
             'id' => 0,
             'title' => '',
+            'parent_id' => 0,
         ]);
 
     }
@@ -33,7 +45,8 @@ class MyTargets extends Component
         foreach ($pcrs as $pcr) {
             array_push($this->targets, [
                 'id' => $pcr->id,
-                'title' => $pcr->targets
+                'title' => $pcr->targets,
+                'parent_id' => $pcr->parent_id
             ]);
         }
 
@@ -60,6 +73,7 @@ class MyTargets extends Component
 
     public function update()
     {
+
         activity()->log('Update target');
         $this->validate();
 
@@ -69,6 +83,7 @@ class MyTargets extends Component
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
                     'targets' => $target['title'],
+                    'parent_id' => $target['parent_id'],
                     'status' => Pcr::NEW,
                 ]
             );
@@ -78,6 +93,7 @@ class MyTargets extends Component
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
                     'targets' => $target['title'],
+                    'parent_id' => $target['parent_id'],
                     'status' => Pcr::NEW,
                 ]
             );
@@ -103,10 +119,10 @@ class MyTargets extends Component
 
         $mfo_paps = $mfo_paps->groupBy('target_function_id');
 
-        $target_counts = Pcr::where('user_id', auth()->user()->id)
+        $my_targets = Pcr::where('user_id', auth()->user()->id)
                         ->whereYear('created_at', now()->format('Y'))
-                        ->count();
+                        ->get();
 
-        return view('livewire.my-targets', compact('target_functions', 'mfo_paps', 'target_counts'));
+        return view('livewire.my-targets', compact('target_functions', 'mfo_paps', 'my_targets'));
     }
 }

@@ -32,31 +32,35 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-    Route::get('/users', User::class)->middleware(['permission:admin.read'])->name('users.index');
+    Route::middleware(['permission:admin.read'])->group(function () {
+        Route::get('/users', User::class)->name('users.index');
 
-    Route::get('/offices', Office::class)->name('offices.index');
+        Route::get('/offices', Office::class)->name('offices.index');
 
-    Route::get('/mfo-pap', MfoPap::class)->name('mfo-pap.index');
+        Route::get('/mfo-pap', MfoPap::class)->name('mfo-pap.index');
 
-    Route::get('/calendar', Calendar::class)->name('calendar.index');
+        Route::get('/calendar', Calendar::class)->name('calendar.index');
 
-    Route::get('/logs', Log::class)->name('logs.index');
+        Route::get('/logs', Log::class)->name('logs.index');
 
-    Route::get('/roles', RolesAndPermission::class)->name('roles.index');
+        Route::get('/roles', RolesAndPermission::class)->name('roles.index');
+    });
+    
+    Route::middleware(['permission:pmt.read'])->group(function () {
+        Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
+        Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
+    
+        Route::get('/rated-opcrs', RatedOpcr::class)->name('rated.opcr.index');
+        Route::get('/rated-opcr/{user}', ViewRatedOpcr::class)->name('rated.opcr.show');
+    });
 
-    Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
-    Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
+    Route::middleware(['permission:office-head.read'])->group(function () {
+        Route::get('/targets', MyTargets::class)->name('my-targets.index');
+        Route::get('/ipcr', Ipcr::class)->name('ipcr.index');
+        Route::get('/opcr', Opcr::class)->name('opcr.index');
+    });
 
-    Route::get('/rated-opcrs', RatedOpcr::class)->name('rated.opcr.index');
-    Route::get('/rated-opcr/{user}', ViewRatedOpcr::class)->name('rated.opcr.show');
-
-    Route::get('/targets', MyTargets::class)->name('my-targets.index');
-
-    Route::get('/ipcr', Ipcr::class)->name('ipcr.index');
-
-    Route::get('/opcr', Opcr::class)->name('opcr.index');
-
-    Route::prefix('target-approvals')->group(function () {
+    Route::prefix('target-approvals')->middleware(['permission:pmt.read'])->group(function () {
         Route::get('/', TargetApproval::class)->name('target.approvals.index');
         Route::get('/view/{user}', TargetApprovalView::class)->name('target.approvals.show');
         Route::post('/acknowledge/{user}', [TargetAcknowledgementController::class, 'store'])->name('target.acknowledgement.store');
