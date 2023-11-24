@@ -40,6 +40,11 @@ class GeneratePdfController extends Controller
                 'signed' => $this->signed
             ]);
             $pdf->setPaper('A4', 'landscape');
+            // $pdf->output();
+            // $domPdf = $pdf->getDomPDF();
+  
+            // $canvas = $domPdf->get_canvas();
+            // $canvas->page_text(10, $canvas->get_height() - 20, "Page {PAGE_NUM} of {PAGE_COUNT}", null, 10, [0, 0, 0]);
 
 
             return $pdf->stream('ipcr-pdf.pdf');

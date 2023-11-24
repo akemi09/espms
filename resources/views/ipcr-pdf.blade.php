@@ -6,8 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        /** Define the footer rules **/
+        footer {
+            position: fixed; 
+            bottom: 0cm; 
+            left: 0cm; 
+            right: 0cm;
+            height: 2cm;
+
+            /** Extra personal styles **/
+            color: black;
+            line-height: 1.5cm;
+        }
+    </style>
 </head>
 <body>
+    <div class="row">
+        <table>
+            <tbody>
+                <tr>
+                    <td width="10%">
+                        <img src="{{public_path('assets/img/logo.png')}}" width="80px;" height="80px;" alt="CSPC logo">
+                    </td>
+                    <td>
+                        Republic of the Philippines <br>
+                        <strong>CAMARINES SUR POLYTECHNIC COLLEGES</strong> <br>
+                        Nabua, Camarines Sur
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="border: 5px; solid;">
+    </div>
     <div class="col-md-12 text-center">
         <p class="fw-bold">
             INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR)
@@ -26,9 +58,9 @@
         <div class="table-responsive">
             <table class="table table-bordered" style="border: 1px;">
                 <thead>
-                    <th>Noted by:</th>
-                    <th>Verified by:</th>
-                    <th>Approved by:</th>
+                    <th style="text-align: center;">Noted by:</th>
+                    <th style="text-align: center;">Verified by:</th>
+                    <th style="text-align: center;">Approved by:</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -167,5 +199,18 @@
             </table>
         </div>
     </div>
+
+    <footer style="display: flex;">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered" style="border: 1px;">
+                    <tr>
+                        <td style="text-align: left;" width="50%">Effectivity date: January {{ now()->format('Y') }}</td>
+                        <td style="text-align: left;">Rev 0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-md-12">
-            <a href="{{ route('generate.report', ['type' => 'opcr', 'user' => $user->id]) }}" class="btn btn-link float-end"><i class="menu-icon tf-icons bx bx-download"></i>Download as PDF</a>
+            <a href="{{ route('generate.report', ['type' => 'opcr', 'user' => $user->id]) }}" target="_blank" class="btn btn-link float-end"><i class="menu-icon tf-icons bx bx-download"></i>Download as PDF</a>
         </div>
     </div>
     <div class="col-md-12 text-center">
