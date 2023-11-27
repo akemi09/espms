@@ -5,9 +5,14 @@ namespace App\Livewire;
 use App\Models\Opcr;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\Signatories;
+use Livewire\Attributes\Rule;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ViewRatedOpcr extends Component
 {
+    use WithFileUploads;
+
     public User $user;
 
     public $ipcr;
@@ -16,6 +21,12 @@ class ViewRatedOpcr extends Component
     public $core;
     public $support;
 
+    public $signed = '';
+
+ 
+    #[Rule('image|max:1024')] // 1MB Max
+    public $esign;
+
     public function mount(User $user)
     {
         $this->user = $user;
@@ -23,6 +34,38 @@ class ViewRatedOpcr extends Component
         $mfo_paps = Opcr::where('user_id', $user->id)->with('mfo_pap')->get();
 
         $this->ipcr = collect($mfo_paps)->groupBy(['mfo_pap.target_function.name', 'mfo_pap.title']);                                                                   
+    
+        $this->checkIfSigned();
+    }
+
+    public function checkIfSigned()
+    {
+
+        $signed = Signatories::where('pcr_owner_id', $this->user->id)
+            ->where('signatory_id', auth()->user()->id)
+            ->where('pcr_type', 'opcr')
+            ->first();
+
+        if ($signed)
+        {
+            $this->signed = $signed->signature;
+        }
+    }
+
+    public function save()
+    {
+        $this->validate();
+
+        $eSign = $this->esign->store('report-esign');
+        Signatories::create([
+            'pcr_owner_id' => $this->user->id,
+            'signatory_id' => auth()->user()->id,
+            'signature' => $eSign,
+            'pcr_type' => 'opcr'
+        ]);
+
+        session()->flash('success', 'Updated.');
+        $this->redirect(RatedIpcr::class);
     }
 
     public function getRating()
@@ -39,16 +82,19 @@ class ViewRatedOpcr extends Component
             $data = [];
     
             foreach ($pcrs as $pcr) {
-                if($pcr->mfo_pap->target_function->id == $pcr->mfo_pap->target_function_id)
+                if(!is_null($pcr->mfo_pap->target_function->id) && !is_null($pcr->mfo_pap->target_function_id))
                 {
-                    $data[] = [
-                        'id' => $pcr->mfo_pap->target_function->id,
-                        'pcr_id' => $pcr->id,
-                        'q1' => $pcr->q1,
-                        'e2' => $pcr->e2,
-                        't3' => $pcr->t3,
-                        'a4' => $pcr->a4
-                    ];
+                    if($pcr->mfo_pap->target_function->id == $pcr->mfo_pap->target_function_id)
+                    {
+                        $data[] = [
+                            'id' => $pcr->mfo_pap->target_function->id,
+                            'pcr_id' => $pcr->id,
+                            'q1' => $pcr->q1,
+                            'e2' => $pcr->e2,
+                            't3' => $pcr->t3,
+                            'a4' => $pcr->a4
+                        ];
+                    }
                 }
             }
     

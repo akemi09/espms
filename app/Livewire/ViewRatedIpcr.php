@@ -35,7 +35,8 @@ class ViewRatedIpcr extends Component
         Signatories::create([
             'pcr_owner_id' => $this->user->id,
             'signatory_id' => auth()->user()->id,
-            'signature' => $eSign
+            'signature' => $eSign,
+            'pcr_type' => 'ipcr'
         ]);
 
         session()->flash('success', 'Updated.');
@@ -58,6 +59,7 @@ class ViewRatedIpcr extends Component
 
         $signed = Signatories::where('pcr_owner_id', $this->user->id)
             ->where('signatory_id', auth()->user()->id)
+            ->where('pcr_type', 'ipcr')
             ->first();
 
         if ($signed)
@@ -80,16 +82,19 @@ class ViewRatedIpcr extends Component
             $data = [];
     
             foreach ($pcrs as $pcr) {
-                if($pcr->mfo_pap->target_function->id == $pcr->mfo_pap->target_function_id)
+                if (!is_null($pcr->mfo_pap->target_function->id) && !is_null($pcr->mfo_pap->target_function_id))
                 {
-                    $data[] = [
-                        'id' => $pcr->mfo_pap->target_function->id,
-                        'pcr_id' => $pcr->id,
-                        'q1' => $pcr->q1,
-                        'e2' => $pcr->e2,
-                        't3' => $pcr->t3,
-                        'a4' => $pcr->a4
-                    ];
+                    if($pcr->mfo_pap->target_function->id == $pcr->mfo_pap->target_function_id)
+                    {
+                        $data[] = [
+                            'id' => $pcr->mfo_pap->target_function->id,
+                            'pcr_id' => $pcr->id,
+                            'q1' => $pcr->q1,
+                            'e2' => $pcr->e2,
+                            't3' => $pcr->t3,
+                            'a4' => $pcr->a4
+                        ];
+                    }
                 }
             }
     

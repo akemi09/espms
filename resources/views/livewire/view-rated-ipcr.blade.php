@@ -137,7 +137,7 @@
                                     <input type="file" wire:model="esign">
 
                                     <button type="submit" class="btn btn-primary btn-sm mt-1">Save eSign</button>
-                                    @error('eSign')
+                                    @error('esign')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
                                     <div wire:loading wire:target="esign">Uploading...</div>
