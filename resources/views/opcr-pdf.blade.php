@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-12 text-center">
         <p class="fw-bold">
-            OFFICE PERFORMANCE COMMITMENT AND REVIEW (IPCR)
+            OFFICE PERFORMANCE COMMITMENT AND REVIEW (OPCR)
         </p>
     </div>
 
