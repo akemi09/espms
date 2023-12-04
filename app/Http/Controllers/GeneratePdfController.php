@@ -19,7 +19,10 @@ class GeneratePdfController extends Controller
 
     public function __invoke($type, User $user)
     {
-
+        // $t = Pdf::loadView('testpdf');
+        // $t->setPaper('A4', 'landscape');
+        // return $t->stream('test.pdf');
+        // die();
         $this->type = $type;
         $this->user = $user;
         if($type === 'ipcr')

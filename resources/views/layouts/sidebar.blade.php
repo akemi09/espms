@@ -117,7 +117,7 @@
             </li>
         @endcan
 
-        @can('pmt.read')
+        @canany(['pmt.read', 'office-head.read'])
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Reports</span>
         </li>

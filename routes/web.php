@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/roles', RolesAndPermission::class)->name('roles.index');
     });
     
-    Route::middleware(['permission:pmt.read'])->group(function () {
+    Route::middleware(['permission:pmt.read|office-head.read'])->group(function () {
         Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
         Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
     
