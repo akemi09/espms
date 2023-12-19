@@ -34,13 +34,14 @@ class Ipcr extends Component
     public function save()
     {
         activity()->log('Create IPCR');
-        $count = count(array_filter([$this->q1, $this->e2, $this->t3], 'strlen'));
+
+        $count = count(array_filter([$this->q1, $this->e2, $this->t3]));
         
         $pcr = Pcr::find($this->ipcr_id);
         $pcr->actual_accomplishments = $this->actual_accomplishment;
-        $pcr->q1 = ($this->q1 == "") ? null : $this->q1;
-        $pcr->e2 = ($this->e2 == "") ? null : $this->e2;
-        $pcr->t3 = ($this->t3 == "") ? null : $this->t3;
+        $pcr->q1 = ($this->q1 == "" or $this->q1 == 0) ? null : $this->q1;
+        $pcr->e2 = ($this->e2 == "" or $this->e2 == 0) ? null : $this->e2;
+        $pcr->t3 = ($this->t3 == "" or $this->t3 == 0) ? null : $this->t3;
         
         $pcr->a4 = number_format(( (int)$this->q1 + (int)$this->e2 + (int)$this->t3 ) / $count, 2);
         $pcr->save();

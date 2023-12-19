@@ -40,6 +40,28 @@
             bottom: 0px;
             margin-bottom: -10px;
         }
+
+        table.customTable {
+            width: 100%;
+            background-color: #FFFFFF;
+            border-collapse: collapse;
+            border-width: 1px;
+            border-color: #A6A6A6;
+            border-style: solid;
+            color: #4F4F4F;
+        }
+
+        table.customTable td,
+        table.customTable th {
+            border-width: 1px;
+            border-color: #A6A6A6;
+            border-style: solid;
+            padding: 2px;
+        }
+
+        table.customTable thead {
+            background-color: #FFFFFF;
+        }
     </style>
 </head>
 
@@ -85,7 +107,7 @@
 
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table table-bordered" style="border: 1px;">
+                <table class="customTable">
                     <thead>
                         <th style="text-align: center;">Noted by:</th>
                         <th style="text-align: center;">Verified by:</th>
@@ -119,7 +141,7 @@
 
         <div class="col-md-12 mt-4">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="customTable">
                     <thead class="text-center">
                         <tr>
                             <th rowspan="2">MFO/PAP</th>

@@ -1,7 +1,8 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('generate.report', ['type' => 'ipcr', 'user' => $user->id]) }}" target="_blank" class="btn btn-link float-end"><i class="menu-icon tf-icons bx bx-download"></i>Download as PDF</a>
+            <a href="{{ route('generate.report', ['type' => 'ipcr', 'user' => $user->id]) }}" target="_blank"
+                class="btn btn-link float-end"><i class="menu-icon tf-icons bx bx-download"></i>Download as PDF</a>
         </div>
     </div>
     <div class="col-md-12 text-center">
@@ -84,9 +85,9 @@
                                 <tr>
                                     <td>{{ $target->targets }}</td>
                                     <td>{{ $target->actual_accomplishments }}</td>
-                                    <td>{{ $target->q1 }}</td>
-                                    <td>{{ $target->e2 }}</td>
-                                    <td>{{ $target->t3 }}</td>
+                                    <td>{{ ($target->q1 == null or $target->q1 == 0) ? 'x' : $target->q1 }}</td>
+                                    <td>{{ ($target->e2 == null or $target->e2 == 0) ? 'x' : $target->e2 }}</td>
+                                    <td>{{ ($target->t3 == null or $target->t3 == 0) ? 'x' : $target->t3 }}</td>
                                     <td>{{ $target->a4 }}</td>
                                     <td>{{ $target->remarks }}</td>
                                 </tr>
@@ -131,7 +132,8 @@
                     <tr>
                         <td rowspan="2">
                             @if ($signed != '')
-                                <img src="{{ asset('/storage/' . $signed) }}" alt="signature" width="150px" height="100px">
+                                <img src="{{ asset('/storage/' . $signed) }}" alt="signature" width="150px"
+                                    height="100px">
                             @else
                                 <form wire:submit="save">
                                     <input type="file" wire:model="esign">

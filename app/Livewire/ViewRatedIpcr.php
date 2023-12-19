@@ -47,7 +47,10 @@ class ViewRatedIpcr extends Component
     {
         $this->user = $user;
 
-        $mfo_paps = Pcr::where('user_id', $user->id)->with('mfo_pap')->get();
+        $mfo_paps = Pcr::where('user_id', $user->id)
+                ->where('status', Pcr::APPROVED)
+                ->with('mfo_pap')
+                ->get();
 
         $this->ipcr = collect($mfo_paps)->groupBy(['mfo_pap.target_function.name', 'mfo_pap.title']);    
         

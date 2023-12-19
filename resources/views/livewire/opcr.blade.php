@@ -19,9 +19,9 @@
                         <td>{{ $pcr->mfo_pap->title }}</td>
                         <td>{{ $pcr->targets }}</td>
                         <td>{{ $pcr->actual_accomplishments }}</td>
-                        <td>{{ $pcr->q1 }}</td>
-                        <td>{{ $pcr->e2 }}</td>
-                        <td>{{ $pcr->t3 }}</td>
+                        <td>{{ ($pcr->q1 == null or $pcr->q1 == 0) ? 'x' : $pcr->q1 }}</td>
+                        <td>{{ ($pcr->e2 == null or $pcr->e2 == 0) ? 'x' : $pcr->e2 }}</td>
+                        <td>{{ ($pcr->t3 == null or $pcr->t3 == 0) ? 'x' : $pcr->t3 }}</td>
                         <td>{{ $pcr->a4 }}</td>
                         <td>
                             <button wire:click="rate({{ $pcr->id }})" class="dropdown-item"

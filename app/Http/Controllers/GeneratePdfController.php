@@ -27,7 +27,7 @@ class GeneratePdfController extends Controller
         $this->user = $user;
         if($type === 'ipcr')
         {
-            $mfo_paps = Pcr::where('user_id', $user->id)->with('mfo_pap')->get();
+            $mfo_paps = Pcr::where('user_id', $user->id)->where('status', Pcr::APPROVED)->with('mfo_pap')->get();
 
             $this->checkIfSigned();
     
@@ -53,7 +53,7 @@ class GeneratePdfController extends Controller
             return $pdf->stream('ipcr-pdf.pdf');
 
         } elseif ($type === 'opcr') {
-            $mfo_paps = Opcr::where('user_id', $user->id)->with('mfo_pap')->get();
+            $mfo_paps = Opcr::where('user_id', $user->id)->where('status', Opcr::APPROVED)->with('mfo_pap')->get();
 
             $this->checkIfSigned();
     

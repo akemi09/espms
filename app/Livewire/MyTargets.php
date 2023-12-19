@@ -13,6 +13,8 @@ class MyTargets extends Component
     public $targets = [];
     public $forApproval = 'no';
 
+    public $modal_title = "";
+
     public function mount()
     {
         $result = Pcr::where('user_id', auth()->user()->id)
@@ -34,9 +36,10 @@ class MyTargets extends Component
 
     }
 
-    public function edit($id)
+    public function edit($id, $title)
     {
         activity()->log('Edit target');
+        $this->modal_title = $title;
         $this->mfo_pap_id = $id;
         $pcrs = Pcr::where('user_id', auth()->user()->id)
             ->where('mfo_pap_id', $id)

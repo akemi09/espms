@@ -29,7 +29,7 @@
                                                     <tr>
                                                         <td width="80%">{{ $mp['title'] }}</td>
                                                         <td>
-                                                            <button wire:click="edit({{ $mp['id'] }})"
+                                                            <button wire:click="edit({{ $mp['id'] }}, '{{ $target_function->name }}')"
                                                                 class="btn btn-primary" data-bs-toggle="modal"
                                                                 data-bs-target="#editTargetModal">Action</button>
                                                         </td>
@@ -62,7 +62,7 @@
             <div class="modal-content">
                 <form>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">Add/Edit Target</h5>
+                        <h5 class="modal-title" id="exampleModalLabel1">Add/Edit Target - {{ $modal_title }}</h5>
                         <button type="button" wire:click="cancel" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
