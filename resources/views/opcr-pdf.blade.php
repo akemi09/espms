@@ -109,27 +109,24 @@
             <div class="table-responsive">
                 <table class="customTable">
                     <thead>
-                        <th style="text-align: center;">Noted by:</th>
-                        <th style="text-align: center;">Verified by:</th>
-                        <th style="text-align: center;">Approved by:</th>
+                        <th>Reviewed by:</th>
+                        <th>Approved by:</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <p class="text-center mt-3">
-                                    CHALLIZ D. OMOROG, DIT
+                                <p class="text-center mt-3 fw-bold">
+                                    <u>TERESITA B. SALAZAR, PhD</u>
                                 </p>
-                                <p class="lh-1 text-center">Dean</p>
+                                <p class="lh-1 text-center">
+                                    Vice President for Research, <br>
+                                    Extension, <br>
+                                    Production and Entrepreneurial Development
+                                </p>
                             </td>
                             <td>
-                                <p class="text-center mt-3">
-                                    ESTELITO R. CLEMENTE, PhD
-                                </p>
-                                <p class="lh-1 text-center">VP for Academic Affairs</p>
-                            </td>
-                            <td>
-                                <p class="text-center mt-3">
-                                    DULCE F. ATIAN, PhD
+                                <p class="text-center mt-3 fw-bold">
+                                    <u>DULCE F. ATIAN, PhD</u>
                                 </p>
                                 <p class="lh-1 text-center">Officer-in-Charge</p>
                             </td>
@@ -147,6 +144,11 @@
                             <th rowspan="2">MFO/PAP</th>
                             <th rowspan="2">SUCCESS INDICATORS
                                 (TARGETS + MEASURES)</th>
+                            <th rowspan="2">Alloted budget</th>
+                            <th rowspan="2">
+                                Unit/Section/
+                                Individual/Accountable
+                            </th>
                             <th rowspan="2">Actual Accomplishments</th>
                             <th colspan="4">Rating</th>
                             <th rowspan='2'>Remarks</th>
@@ -161,7 +163,7 @@
                     <tbody>
                         @forelse ($opcr as $targetFunction => $mfoPaps)
                             <tr>
-                                <td colspan="8" class="text-dark bg-warning">{{ Str::upper($targetFunction) }}</td>
+                                <td colspan="10" class="text-dark bg-warning">{{ Str::upper($targetFunction) }}</td>
                             </tr>
                             @foreach ($mfoPaps as $mfoPap => $targets)
                                 <tr>
@@ -170,10 +172,12 @@
                                 @foreach ($targets as $target)
                                     <tr>
                                         <td>{{ $target->targets }}</td>
+                                        <td>{{ $target->alloted_budget }}</td>
+                                        <td>{{ $target->accountable }}</td>
                                         <td>{{ $target->actual_accomplishments }}</td>
-                                        <td>{{ $target->q1 }}</td>
-                                        <td>{{ $target->e2 }}</td>
-                                        <td>{{ $target->t3 }}</td>
+                                        <td>{{ ($target->q1 == null or $target->q1 == 0) ? 'x' : $target->q1 }}</td>
+                                        <td>{{ ($target->e2 == null or $target->e2 == 0) ? 'x' : $target->e2 }}</td>
+                                        <td>{{ ($target->t3 == null or $target->t3 == 0) ? 'x' : $target->t3 }}</td>
                                         <td>{{ $target->a4 }}</td>
                                         <td>{{ $target->remarks }}</td>
                                     </tr>
@@ -182,72 +186,65 @@
 
                         @empty
                             <tr>
-                                <td colspan="8">No results</td>
+                                <td colspan="10">No results</td>
                             </tr>
                         @endforelse
                         <tr>
-                            <td colspan="7">STRATEGIC FUNCTION (45%)</td>
-                            <td colspan="1">{{ number_format($strategic, 2) }}</td>
+                            <td colspan="8">STRATEGIC FUNCTION (45%)</td>
+                            <td colspan="2">{{ number_format($strategic, 2) }}</td>
                         </tr>
                         <tr>
-                            <td colspan="7">COR FUNCTION (45%)</td>
-                            <td colspan="1">{{ number_format($core, 2) }}</td>
+                            <td colspan="8">COR FUNCTION (45%)</td>
+                            <td colspan="2">{{ number_format($core, 2) }}</td>
                         </tr>
                         <tr>
-                            <td colspan="7">SUPPORT FUNCTION (10%)</td>
-                            <td colspan="1">{{ number_format($support, 2) }}</td>
+                            <td colspan="8">SUPPORT FUNCTION (10%)</td>
+                            <td colspan="2">{{ number_format($support, 2) }}</td>
                         </tr>
                         <tr>
-                            <td colspan="7">TOTAL OVERALL RATING</td>
-                            <td colspan="1">{{ number_format($strategic + $core + $support, 2) }}</td>
+                            <td colspan="8">TOTAL OVERALL RATING</td>
+                            <td colspan="2">{{ number_format($strategic + $core + $support, 2) }}</td>
                         </tr>
 
                         <tr>
-                            <td colspan="8">Comments and Recommendation for Development Purposes</td>
+                            <td colspan="10">Comments and Recommendation for Development Purposes</td>
                         </tr>
 
-
-                        <tr class="text-center">
-                            <td>Discuss with:</td>
-                            <td>Assessed by:</td>
-                            <td>Noted by:</td>
-                            <td colspan="4">Approved by:</td>
-                            <td>Date:</td>
-                        </tr>
 
                         <tr>
-                            <td rowspan="2">
-                                @if ($signed != '')
-                                    <img src="{{ public_path('storage/' . $signed) }}" alt="signature" width="150px"
-                                        height="100px">
-                                @endif
+                            <td colspan="3">
+                                <p class="text-center mt-3 fw-bold">
+                                    <u>DULCE F. ATIAN, PhD</u>
+                                </p>
+                                <p class="lh-1 text-center">Officer-in-Charge</p>
                             </td>
-                            <td>I certify that I discussed my assessment of the performance with the employee</td>
-                            <td rowspan="2">&nbsp;</td>
-                            <td colspan="4" rowspan="2">&nbsp;</td>
-                            <td rowspan="2">&nbsp;</td>
+                            <td colspan="2" class="text-center">Performance management team</td>
+                            <td colspan="5">
+                                <p class="text-center mt-3 fw-bold">
+                                    <u>DULCE F. ATIAN, PhD</u>
+                                </p>
+                                <p class="lh-1 text-center">Officer-in-Charge</p>
+                            </td>
                         </tr>
-
                         <tr>
-                            <td>&nbsp;</td>
+                            <td colspan="3">Date:</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td colspan="5">Date:</td>
                         </tr>
-
-                        <tr class="text-center">
-                            <td>{{ auth()->user()->name }}</td>
-                            <td>CHALLIZ DELIMA-OMOROG, DIT</td>
-                            <td>ESTELITO R. CLEMENTE, PhD</td>
-                            <td colspan="4">DULCE F. ATIAN, PhD</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>{{ auth()->user()->designation }}</td>
-                            <td>Dean</td>
-                            <td>VPAA</td>
-                            <td colspan="4">Officer-in-charge</td>
-                            <td>&nbsp;</td>
-                        </tr>
-
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="10">
+                                <strong>Legend:</strong> 1 - Quantity, 2 - Efficiency, 3 - Timeliness, 4 - Average
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="10">
+                                <strong>Rating Scale:</strong> 5 - Outstanding, 4 - Very Satisfactory, 3 - Satisfactory,
+                                2 - Unsatisfactory, 1 - Poor
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

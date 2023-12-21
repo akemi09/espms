@@ -171,9 +171,9 @@
                                     <tr>
                                         <td>{{ $target->targets }}</td>
                                         <td>{{ $target->actual_accomplishments }}</td>
-                                        <td>{{ $target->q1 }}</td>
-                                        <td>{{ $target->e2 }}</td>
-                                        <td>{{ $target->t3 }}</td>
+                                        <td>{{ ($target->q1 == null or $target->q1 == 0) ? 'x' : $target->q1 }}</td>
+                                        <td>{{ ($target->e2 == null or $target->e2 == 0) ? 'x' : $target->e2 }}</td>
+                                        <td>{{ ($target->t3 == null or $target->t3 == 0) ? 'x' : $target->t3 }}</td>
                                         <td>{{ $target->a4 }}</td>
                                         <td>{{ $target->remarks }}</td>
                                     </tr>
