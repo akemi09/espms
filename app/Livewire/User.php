@@ -33,7 +33,6 @@ class User extends Component
 
     public function store()
     {
-        activity()->log('Create user');
         $this->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email:filter|max:250|unique:users',
@@ -42,6 +41,15 @@ class User extends Component
             'roles' => 'required',
             'password' => 'required|min:6|confirmed'
         ]);
+
+        $email = $this->email;
+        $username = strstr($email, '@', true);
+        if (strpos($username, $this->password) == false)
+        {
+            return $this->addError('password', 'Password must not contains words related to your email');
+        }
+
+        activity()->log('Create user');
 
         $user = Users::create([
             'name' => Str::title($this->name),

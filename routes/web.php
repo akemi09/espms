@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/roles', RolesAndPermission::class)->name('roles.index');
     });
     
-    Route::middleware(['permission:pmt.read|office-head.read'])->group(function () {
+    Route::middleware(['permission:pmt.read|office-head.read|employee.read'])->group(function () {
         Route::get('/rated-ipcrs', RatedIpcr::class)->name('rated.ipcr.index');
         Route::get('/rated-ipcr/{user}', ViewRatedIpcr::class)->name('rated.ipcr.show');
     
@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/rated-opcr/{user}', ViewRatedOpcr::class)->name('rated.opcr.show');
     });
 
-    Route::middleware(['permission:office-head.read'])->group(function () {
+    Route::middleware(['permission:office-head.read|employee.read'])->group(function () {
         Route::get('/targets', MyTargets::class)->name('my-targets.index');
         Route::get('/ipcr', Ipcr::class)->name('ipcr.index');
         Route::get('/opcr', Opcr::class)->name('opcr.index');

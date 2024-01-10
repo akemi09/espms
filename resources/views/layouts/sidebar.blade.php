@@ -117,44 +117,47 @@
             </li>
         @endcan
 
-        @canany(['pmt.read', 'office-head.read'])
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Reports</span>
-        </li>
+        @canany(['pmt.read', 'office-head.read', 'employee.read'])
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Reports</span>
+            </li>
 
-        <li class="menu-item {{ in_array(request()->segment(1), ['rated-ipcrs', 'rated-opcrs']) ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Reports">Reports</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->segment(1) == 'rated-ipcrs' ? 'active' : '' }}">
-                    <a href="{{ route('rated.ipcr.index') }}" class="menu-link">
-                        <div data-i18n="Rated IPCS">Rated IPCR</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->segment(1) == 'rated-opcrs' ? 'active' : '' }}">
-                    <a href="{{ route('rated.opcr.index') }}" class="menu-link">
-                        <div data-i18n="Rated OPCR">Rated OPCR</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endcan
+            <li class="menu-item {{ in_array(request()->segment(1), ['rated-ipcrs', 'rated-opcrs']) ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="Reports">Reports</div>
+                </a>
+                <ul class="menu-sub">
 
-        
+                    <li class="menu-item {{ request()->segment(1) == 'rated-ipcrs' ? 'active' : '' }}">
+                        <a href="{{ route('rated.ipcr.index') }}" class="menu-link">
+                            <div data-i18n="Rated IPCS">Rated IPCR</div>
+                        </a>
+                    </li>
+
+                    @cannot('employee.read')
+                        <li class="menu-item {{ request()->segment(1) == 'rated-opcrs' ? 'active' : '' }}">
+                            <a href="{{ route('rated.opcr.index') }}" class="menu-link">
+                                <div data-i18n="Rated OPCR">Rated OPCR</div>
+                            </a>
+                        </li>
+                    @endcannot
+                </ul>
+            </li>
+        @endcanany
+
+
         @can('office-head.read')
-        
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">SUCCESS INDICATORS</span>
-        </li>
-        <!-- TARGETS -->
-        <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
-            <a href="{{ route('my-targets.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="My Targets">My Targets</div>
-            </a>
-        </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">SUCCESS INDICATORS</span>
+            </li>
+            <!-- TARGETS -->
+            <li class="menu-item {{ request()->segment(1) == 'targets' ? 'active' : '' }}">
+                <a href="{{ route('my-targets.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="My Targets">My Targets</div>
+                </a>
+            </li>
         @endcan
 
         @can('pmt.read')
@@ -166,31 +169,33 @@
             </li>
         @endcan
 
-        @can('office-head.read')
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">OPCR</span>
-        </li>
+        @canany(['office-head.read', 'employee.read'])
+            @cannot('employee.read')
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">OPCR</span>
+                </li>
 
-        <!-- OPCR -->
-        <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
-            <a href="{{ route('opcr.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="OPCR">OPCR</div>
-            </a>
-        </li>
+                <!-- OPCR -->
+                <li class="menu-item {{ request()->segment(1) == 'opcr' ? 'active' : '' }}">
+                    <a href="{{ route('opcr.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file"></i>
+                        <div data-i18n="OPCR">OPCR</div>
+                    </a>
+                </li>
+            @endcannot
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">IPCR</span>
-        </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">IPCR</span>
+            </li>
 
-        <!-- IPCR -->
-        <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
-            <a href="{{ route('ipcr.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Analytics">IPCR</div>
-            </a>
-        </li>
-        @endcan
+            <!-- IPCR -->
+            <li class="menu-item {{ request()->segment(1) == 'ipcr' ? 'active' : '' }}">
+                <a href="{{ route('ipcr.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Analytics">IPCR</div>
+                </a>
+            </li>
+        @endcanany
 
     </ul>
 
