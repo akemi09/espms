@@ -44,7 +44,7 @@ class User extends Component
 
         $email = $this->email;
         $username = strstr($email, '@', true);
-        if (strpos($username, $this->password) == false)
+        if (strpos($username, $this->password) !== false)
         {
             return $this->addError('password', 'Password must not contains words related to your email');
         }
