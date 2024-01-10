@@ -32,6 +32,7 @@ class MyTargets extends Component
             'id' => 0,
             'title' => '',
             'parent_id' => 0,
+            'accountable' => '',
         ]);
 
     }
@@ -49,7 +50,8 @@ class MyTargets extends Component
             array_push($this->targets, [
                 'id' => $pcr->id,
                 'title' => $pcr->targets,
-                'parent_id' => $pcr->parent_id
+                'parent_id' => $pcr->parent_id,
+                'accountable' => $pcr->accountable,
             ]);
         }
 
@@ -76,7 +78,7 @@ class MyTargets extends Component
 
     public function update()
     {
-
+        
         activity()->log('Update target');
         $this->validate();
 
@@ -86,6 +88,7 @@ class MyTargets extends Component
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
                     'targets' => $target['title'],
+                    'accountable' => $target['accountable'],
                     'parent_id' => $target['parent_id'],
                     'status' => Pcr::NEW,
                 ]
@@ -96,6 +99,7 @@ class MyTargets extends Component
                 [
                     'mfo_pap_id' => $this->mfo_pap_id,
                     'targets' => $target['title'],
+                    'accountable' => $target['accountable'],
                     'parent_id' => $target['parent_id'],
                     'status' => Pcr::NEW,
                 ]

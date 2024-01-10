@@ -73,7 +73,7 @@
                                 @if (count($targets) > 0)
                                     @foreach ($targets as $key => $target)
                                         <input type="hidden" wire:model="targets.{{ $key }}.id">
-                                        <div class="row">
+                                        <div>
                                             <label for="targets.{{ $key }}.parent">Parent</label>
                                             <select class="form-control" wire:model="targets.{{ $key }}.parent_id"
                                                 id="targets.{{ $key }}.parent">
@@ -83,13 +83,18 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="row mt-1">
+                                        <div class="mt-1">
+                                            <label for="targets.{{$key}}.title">Target</label>
                                             <input wire:model="targets.{{ $key }}.title" type="text"
                                                 id="targets.{{ $key }}.title"
                                                 class="mb-2 form-control @error('targets.' . $key . '.title') is-invalid @enderror">
                                         </div>
-                                        <button type="buttn" wire:click.prevent="destroy({{ $key }})"
-                                            class="mb-2 btn btn-danger btn-sm">remove</button>
+                                        <div class="mt-1">
+                                            <label for="targets.{{$key}}.accountable">Accountable (<small>Press Ctrl to select multiple</small>)</label>
+                                            <textarea class="form-control" wire:model="targets.{{$key}}.accountable" id="targets.{{$key}}.accountable" rows="4"></textarea>
+                                        </div>
+                                        <button type="button" wire:click.prevent="destroy({{ $key }})"
+                                            class="mb-2 mt-2 btn btn-danger btn-sm">remove</button>
                                         @error('targets.' . $key . '.title')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}

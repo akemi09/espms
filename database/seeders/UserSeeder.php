@@ -38,6 +38,12 @@ class UserSeeder extends Seeder
                 'email' => 'rater@example.com',
                 'office_id' => 1,
                 'role' => 'rater',
+            ],
+            [
+                'name' => 'Employee',
+                'email' => 'employee@example.com',
+                'office_id' => 1,
+                'role' => 'employee',
             ]
         ];
 

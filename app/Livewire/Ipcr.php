@@ -10,6 +10,7 @@ class Ipcr extends Component
     public $ipcr_id;
 
     public $actual_accomplishment = "";
+    public $alloted_budget = "";
     public $q1;
     public $e2;
     public $t3;
@@ -25,6 +26,7 @@ class Ipcr extends Component
         $pcr = Pcr::find($id);
         $this->ipcr_id = $pcr->id;
         $this->actual_accomplishment = $pcr->actual_accomplishments;
+        $this->alloted_budget = $pcr->alloted_budget;
         $this->q1 = $pcr->q1;
         $this->e2 = $pcr->e2;
         $this->t3 = $pcr->t3;
@@ -39,6 +41,7 @@ class Ipcr extends Component
         
         $pcr = Pcr::find($this->ipcr_id);
         $pcr->actual_accomplishments = $this->actual_accomplishment;
+        $pcr->alloted_budget = $this->alloted_budget;
         $pcr->q1 = ($this->q1 == "" or $this->q1 == 0) ? null : $this->q1;
         $pcr->e2 = ($this->e2 == "" or $this->e2 == 0) ? null : $this->e2;
         $pcr->t3 = ($this->t3 == "" or $this->t3 == 0) ? null : $this->t3;

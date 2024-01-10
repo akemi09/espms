@@ -27,6 +27,7 @@
                                             <tr>
                                                 <th>MFO/PAP</th>
                                                 <th>Targets</th>
+                                                <th>Accountable</th>
                                                 @if ($isAcknowledge == 'no')
                                                     <th>Action</th>
                                                 @endif
@@ -36,16 +37,20 @@
                                             @foreach ($pcrs as $pcr)
                                                 @if ($pcr->mfo_pap->target_function_id == $target_function->id)
                                                     <tr>
-                                                        <td width="40%">
+                                                        <td width="30%">
                                                             {{ $pcr->mfo_pap->title }}
                                                         </td>
 
-                                                        <td width="40%">
+                                                        <td width="30%">
                                                             {{ $pcr->targets }}
                                                             @include('components.status', [
                                                                 'badgeColor' => $pcr::BADGE_COLOR[$pcr->status],
                                                                 'status' => $pcr::STATUS[$pcr->status],
                                                             ])
+                                                        </td>
+
+                                                        <td width="20%">
+                                                            {{ $pcr->accountable }}
                                                         </td>
 
                                                         @if ($isAcknowledge == 'no')

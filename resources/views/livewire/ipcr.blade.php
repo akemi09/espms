@@ -5,6 +5,8 @@
                 <tr>
                     <th>MFO/PAP</th>
                     <th>Target + Measure</th>
+                    <th>Alloted Budget</th>
+                    <th>Accountable</th>
                     <th>Actual Accomplishments</th>
                     <th>Q1</th>
                     <th>E2</th>
@@ -18,6 +20,8 @@
                     <tr>
                         <td>{{ $pcr->mfo_pap->title }}</td>
                         <td>{{ $pcr->targets }}</td>
+                        <td>{{ $pcr->alloted_budget }}</td>
+                        <td>{{ $pcr->accountable }}</td>
                         <td>{{ $pcr->actual_accomplishments }}</td>
                         <td>{{ ($pcr->q1 == null or $pcr->q1 == 0) ? 'x' : $pcr->q1 }}</td>
                         <td>{{ ($pcr->e2 == null or $pcr->e2 == 0) ? 'x' : $pcr->e2 }}</td>
@@ -48,25 +52,25 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">No records</td>
+                        <td colspan="10">No records</td>
                     </tr>
                 @endforelse
 
                 <tr>
                     <td>STRATEGIC FUNCTION (45%)</td>
-                    <td colspan="7" class="text-end">{{ number_format($strategic, 2) }}</td>
+                    <td colspan="9" class="text-end">{{ number_format($strategic, 2) }}</td>
                 </tr>
                 <tr>
                     <td>CORE FUNCTIONS (45%)</td>
-                    <td colspan="7" class="text-end">{{ number_format($core, 2) }}</td>
+                    <td colspan="9" class="text-end">{{ number_format($core, 2) }}</td>
                 </tr>
                 <tr>
                     <td>SUPPORT FUNCTIONS (10%)</td>
-                    <td colspan="7" class="text-end">{{ number_format($support, 2) }}</td>
+                    <td colspan="9" class="text-end">{{ number_format($support, 2) }}</td>
                 </tr>
                 <tr>
                     <td>TOTAL OVERALL RATING</td>
-                    <td colspan="7" class="text-end">{{ number_format($strategic + $core + $support, 2) }}</td>
+                    <td colspan="9" class="text-end">{{ number_format($strategic + $core + $support, 2) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -87,6 +91,18 @@
                         @include('layouts.flash')
                         <div class="row">
                             <div class="mb-3">
+                                <label for="alloted_budget" class="form-label">Alloted budget</label>
+                                <input wire:model="alloted_budget" type="text" id="alloted_budget"
+                                    class="form-control @error('alloted_budget') is-invalid @enderror"
+                                    placeholder="">
+                                @error('alloted_budget')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="actual_accomplishment" class="form-label">Actual Accomplishments</label>
                                 <input wire:model="actual_accomplishment" type="text" id="actual_accomplishment"
                                     class="form-control @error('actual_accomplishment') is-invalid @enderror"
@@ -97,6 +113,7 @@
                                     </div>
                                 @enderror
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="q1" class="form-label">Q1</label>
