@@ -73,7 +73,7 @@ class GeneratePdfController extends Controller
             $domPdf = $pdf->getDomPDF();
   
             $canvas = $domPdf->get_canvas();
-            $canvas->page_text(10, $canvas->get_height() - 20, "Page {PAGE_NUM} of {PAGE_COUNT}", null, 10, [0, 0, 0]);
+            $canvas->page_text(760, $canvas->get_height() - 20, "Page {PAGE_NUM} of {PAGE_COUNT}", null, 10, [0, 0, 0]);
 
 
 
